@@ -25,7 +25,7 @@ const Navbar = () => {
     const menuLinks = ['Stories', 'Settings', 'Log-out']
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" >
             <Container maxWidth="xl" >
                 <Toolbar disableGutters >
                     <Box sx={{fleGrow:0, width:'100%'}}>

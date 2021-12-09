@@ -5,14 +5,13 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import Typography from '@mui/material/Typography';
 
 const Footer = () => {
 
     return (
 
         <Box sx={{width: '100%' }} disableGutters >
-            <BottomNavigation showLabels='true' sx={{bgcolor: 'text.secondary'}}>
+            <BottomNavigation showLabels sx={{bgcolor: 'text.secondary'}}>
                 <BottomNavigationAction
                     sx={{color: 'white'}} 
                     label='Github' 
