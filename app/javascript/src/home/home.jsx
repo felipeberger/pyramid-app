@@ -1,59 +1,70 @@
 import React from 'react';
 import Layout from '../layout/layout';
-import StoryCard from './storyCard';
 import Grid from '@mui/material/Grid';
+import StoryCard from '../storyCard/storyCard';
+import AddNewStory from './addNewStory';
 
-// const headerHeightPixels = 58;
-// const footerHeightPixels = 58;
-// const calcViewportHeight = window.innerHeight - headerHeightPixels - footerHeightPixels ;
+export default function Home () {
 
-const Home = () => (
-    <Layout>
-        <Grid 
-            container 
-            spacing={0} 
-            align="center"
-            direction="row"
-            sx={{minHeight: '88vh'}} 
-        >
-            <Grid item xs={12} sm={6} md={4} xl={3} >
-                <StoryCard 
-                    title={"big idea must be completed"} 
-                    firstInsight={"This is my first insight"} 
-                    secondInsight={"A chicken in every pot"} 
-                    thirdInsight={"A car in every garage"} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} xl={3} >
-                <StoryCard 
-                    title={"big idea must be completed"} 
-                    firstInsight={"This is my first insight"} 
-                    secondInsight={"A chicken in every pot"} 
-                    thirdInsight={"A car in every garage"} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} xl={3} >
-                <StoryCard 
-                    title={"big idea must be completed"} 
-                    firstInsight={"This is my first insight"} 
-                    secondInsight={"A chicken in every pot"} 
-                    thirdInsight={"A car in every garage"} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} xl={3} >
-                <StoryCard 
-                    title={"big idea must be completed"} 
-                    firstInsight={"This is my first insight"} 
-                    secondInsight={"A chicken in every pot"} 
-                    thirdInsight={"A car in every garage"} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} xl={3} >
-                <StoryCard 
-                    title={"big idea must be completed"} 
-                    firstInsight={"This is my first insight"} 
-                    secondInsight={"A chicken in every pot"} 
-                    thirdInsight={"A car in every garage"} />
-            </Grid>
-        </Grid>
-    </Layout>
-)
+    const cardWidth = '300px';
 
-export default Home
+    return (
+        <Layout>
+            <Grid
+                item
+                container 
+                spacing={1} 
+                direction="row"
+                alignItems="center" 
+                justify="center"
+                sx={{minHeight: '88vh'}} 
+            >
+                <Grid item xs={12} sm={6} md={4} align='center'  >
+                    <StoryCard 
+                        width={cardWidth}
+                        title={"big idea must be completed"} 
+                        firstInsight={"This is my first insight"} 
+                        secondInsight={"A chicken in every pot"} 
+                        thirdInsight={"A car in every garage"} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} align='center' >
+                    <StoryCard 
+                        width={cardWidth}
+                        title={"big idea must be completed"} 
+                        firstInsight={"This is my first insight"} 
+                        secondInsight={"A chicken in every pot"} 
+                        thirdInsight={"A car in every garage"} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} align='center' >
+                    <StoryCard 
+                        width={cardWidth}
+                        title={"big idea must be completed"} 
+                        firstInsight={"This is my first insight"} 
+                        secondInsight={"A chicken in every pot"} 
+                        thirdInsight={"A car in every garage"} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} align='center' >
+                    <StoryCard 
+                        width={cardWidth}
+                        title={"big idea must be completed"} 
+                        firstInsight={"This is my first insight"} 
+                        secondInsight={"A chicken in every pot"} 
+                        thirdInsight={"A car in every garage"} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} align='center' >
+                    <StoryCard 
+                        width={cardWidth}
+                        title={"big idea must be completed"} 
+                        firstInsight={"This is my first insight"} 
+                        secondInsight={"A chicken in every pot"} 
+                        thirdInsight={"A car in every garage"} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} align='center' >
+                    <AddNewStory width={cardWidth}/>
+                </Grid>
+            </Grid>
+        </Layout>
+    )
+}
+
 
