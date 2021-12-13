@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
@@ -20,6 +20,9 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+
+# Use rails Admin for database oversight
+gem 'rails_admin', '~> 2.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -52,7 +55,7 @@ end
 
 group :production do
     # Use pg as the database for Active Record
-    gem 'pg', '~> 1.1.3'
+    gem 'pg', '~> 1.2.3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
