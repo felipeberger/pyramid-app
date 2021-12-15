@@ -19,10 +19,10 @@ const Navbar = () => {
       };
 
     const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+        setAnchorElNav(null);
     };
 
-    const menuLinks = ['Stories', 'Settings', 'Log-out']
+    const menuLinks = [{title:'Stories', link: '/'}, {title:'Settings', link:'/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
 
     return (
         <AppBar position="static" >
@@ -60,8 +60,10 @@ const Navbar = () => {
                             onClose={handleCloseNavMenu}
                         >
                             {menuLinks.map( (menuLink) => (
-                                <MenuItem key={menuLink}>
-                                    {menuLink}
+                                <MenuItem>
+                                    <Link underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}>
+                                        {menuLink.title}
+                                    </Link>
                                 </MenuItem>    
                             ))}
                         </Menu>
@@ -74,7 +76,7 @@ const Navbar = () => {
                     >
                         <Breadcrumbs aria-label="breadcrumb" color="white" >
                             {menuLinks.map( (menuLink) => (
-                                <Link underline="hover" color="inherit" href="/" key={menuLink}><h3>{menuLink}</h3></Link>    
+                                <Link underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}><h3>{menuLink.title}</h3></Link>    
                             ))}
                         </Breadcrumbs>                        
                     </Box>
