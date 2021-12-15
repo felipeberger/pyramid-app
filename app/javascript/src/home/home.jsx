@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from '../layout/layout';
 import Grid from '@mui/material/Grid';
 import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
 
 export default function Home () {
+
+    // TODO add API call to download all stories the user has created
+
+    // TODO map fetched stories within the grid
+
+    // Add redux for state management so logged-in status and current stories are kept standardized accross all views
 
     const cardWidth = '300px';
 
@@ -13,7 +19,7 @@ export default function Home () {
             <Grid
                 item
                 container 
-                spacing={1} 
+                spacing={3} 
                 direction="row"
                 alignItems="center" 
                 justify="center"

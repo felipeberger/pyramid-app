@@ -8,7 +8,7 @@ const Layout = (props) => (
     
     <CustomTheme >
         <Navbar />
-        <Container maxwidth="xl" disableGutters>
+        <Container maxWidth="xl" disableGutters>
             {props.children}
         </Container>
         <Footer />
