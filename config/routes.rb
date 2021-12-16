@@ -5,4 +5,11 @@ Rails.application.routes.draw do
 
   get '/explanation' => 'pages#explanation'
   
+  namespace :api do
+
+    #Stories
+    get '/stories/getall' => 'stories#getAllStories'
+
+  end
+
 end

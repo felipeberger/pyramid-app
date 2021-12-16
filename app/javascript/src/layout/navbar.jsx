@@ -60,7 +60,7 @@ const Navbar = () => {
                             onClose={handleCloseNavMenu}
                         >
                             {menuLinks.map( (menuLink) => (
-                                <MenuItem>
+                                <MenuItem key={menuLink.title}>
                                     <Link underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}>
                                         {menuLink.title}
                                     </Link>

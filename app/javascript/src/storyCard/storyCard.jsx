@@ -29,7 +29,7 @@ export default function StoryCard (props) {
     }
 
     return (
-        <Card sx={{width: props.width, mx:1, my:1}} >
+        <Card sx={{width: props.width}} >
             <CardHeader title={props.title} />
 
             <CardContent sx={{py:0}} >
