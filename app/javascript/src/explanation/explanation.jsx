@@ -5,6 +5,9 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
 export default function Explanation () {
+
+    const imageWidth = '80%';
+
     return (
         <Layout>
             <Container maxWidth="xl" sx={{my:2}}>
@@ -21,8 +24,8 @@ export default function Explanation () {
                     The pyramid principle - as it's name suggests - requires that we structure our arguments and supporting data in a pyramid format. At the top of the pyramid sits the background information that frames the issue we are dealing with and the answer or main argument we are presenting as the solution to the issue the client is facing, collectively known as SCQA (Situation, Complication, Question, Answer). Below the answer sit supporting arguments and insights, each backed-up by data and analysis.
                 </Typography>
 
-                <Box component="div" sx={{my:2}}>
-                    <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/Pyramid+SCQA.svg" alt="alt" width="70%" style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
+                <Box component="div" sx={{my:3}}>
+                    <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/Pyramid+SCQA.svg" alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
                 </Box>
 
                 <Typography align='left' paragraph>
@@ -49,16 +52,16 @@ export default function Explanation () {
                     The result of structuring our auguments in the pyramid structure should provide us with an overview of the solution being proposed, why that is the right solution, and how that solution fits within the problem that the client is currently facing. For example, if we are presented with a client who is in the used car business and has seen a steady decline in their business over the last couple years, our arguments and insights structured as a pyramid could look as follows: 
                 </Typography>
 
-                <Box component="div" sx={{my:2}}>
-                    <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/Pyramid2.svg" alt="alt" width="70%" style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
+                <Box component="div" sx={{my:3}}>
+                    <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/Pyramid2.svg" alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
                 </Box>
 
                 <Typography align='left' paragraph>
-                    Once we have created the above structure and we are confident about our answer and supporting arguments, we can easily translate the structrure into a presentation slide deck by creating slides with each node in the pyramid. Data and analysis should always come after each key insight they are supporting, but the insights can be placed in whichever order the presenter prefers as they should be mutually exclusive and the order should not matter for the overall narrative. 
+                    Once we have created the above structrure and we are confident about our answer and supporting arguments, we can easily translate the structrure into a presentation slide deck by starting from the top to the bottom of the pyramid, as long as the supporting data and analysis follow each insight. At this point, it is also a good test of how MECE the insights are by placing the insights in several different orders and see if the narrative remains equally strong. If the insights are MECE then the order they are placed in should not have an impact on the overall strength of the arguments. 
                 </Typography>
 
-                <Box component="div" sx={{mt:2, mb:3}}>
-                    <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/slides.svg" alt="alt" width="70%" style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
+                <Box component="div" sx={{my:3}}>
+                    <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/slides.svg" alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
                 </Box>
 
             </Container>
