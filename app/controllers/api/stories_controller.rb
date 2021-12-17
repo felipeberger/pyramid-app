@@ -5,10 +5,11 @@ module Api
             # placeholder for create api call
         end
 
-        def getAllStories
-            @stories = Story.find(1)
+        def getAllUserStories
+
+            @user = User.find_by(id: params[:userId])
             
-            render 'api/stories/getAllStories', status: :ok
+            render 'api/stories/getAllUserStories', status: :ok
             
         end
 
