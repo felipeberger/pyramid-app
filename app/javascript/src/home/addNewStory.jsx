@@ -7,7 +7,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 export default function AddNewStory (props) {
 
     const addNewStoryHandler = () => {
-        // open URL for new sotry creation
+        // TODO navigate to URL for new story creation
     }
 
     return (

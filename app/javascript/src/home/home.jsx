@@ -8,23 +8,26 @@ import {handleErrors} from '../utils/fetchHelper'
 export default function Home () {
     const [stories, setStories] = useState(null);
     const [loaded, setLoaded] = useState(false);
+    const [userId, setUserId] = useState(1)
 
     const cardWidth = '450px';
-    const minCardHeight = '300px'
+    const cardHeight = '400px';
 
-    // TODO add API call to download all stories the user has created
+    // TODO Add redux for state management so logged-in status and current stories are kept standardized accross all views
+    
+    // TODO fetch/get logged in user ID number to pass on to stories fetch request
+
+    // TODO useEffect triggers twice on load of page, fix so only loads once 
 
     useEffect( ()=> {
-        fetch(`/api/stories/${1}/getall`)
+        fetch(`/api/stories/${userId}/getall`)
             .then(handleErrors)
             .then(data => {
-                console.log(data.user.stories)
                 setStories(data.user.stories)
                 setLoaded(true)
             })
     }, [loaded])
 
-    
     const createStoryCards = () => {
         if (!loaded) return
         if (!stories) return
@@ -41,20 +44,22 @@ export default function Home () {
                         px={1}
                         py={2} 
                     >
-                        <StoryCard 
+                        {/* checking array has own property answer obtained from https://stackoverflow.com/questions/13107855/how-to-check-if-an-array-index-exists-or-not-in-javascript
+
+                        Did not use the most upvoted answer but the one that suggests using object inheritance as an array in JS is jus an object under the hood */}
+                         <StoryCard 
                             width={cardWidth}
+                            height={cardHeight}
                             title={story.answer? story.answer : "ANSWER" } 
-                            firstInsight={typeof story.insights[0] === "undefined" ? "INSIGHT" : story.insights[0].insight } 
-                            secondInsight={typeof story.insights[1] === "undefined" ? "INSIGHT" : story.insights[1].insight } 
-                            thirdInsight={typeof story.insights[2] === "undefined" ? "INSIGHT" : story.insights[2].insight} 
+                            firstInsight={story.insights.hasOwnProperty(0) ? story.insights[0].insight : "INSIGHT"  } 
+                            secondInsight={story.insights.hasOwnProperty(1) ? story.insights[1].insight : "INSIGHT" } 
+                            thirdInsight={story.insights.hasOwnProperty(2) ? story.insights[2].insight : "INSIGHT"} 
                         />
                     </Grid>
                 )
             })
         )
     }
-    
-    // TODO Add redux for state management so logged-in status and current stories are kept standardized accross all views
         
     return (
         <Layout>
@@ -69,11 +74,11 @@ export default function Home () {
                 my={{sm:2, md:0}}
                 >
 
-                {loaded? createStoryCards() : console.log("false")}
+                {loaded? createStoryCards() : ""}
 
-                {loaded? createStoryCards() : console.log("false")}
+                {loaded? createStoryCards() : ""}
 
-                {loaded? createStoryCards() : console.log("false")}
+                {loaded? createStoryCards() : ""}
 
                 <Grid item container xs={12} md={6} xl={4} align='center' alignContent='center' justifyContent='center' px={1} py={2} sx={{minHeight: "300px"}} >
                     <AddNewStory width={cardWidth}/>

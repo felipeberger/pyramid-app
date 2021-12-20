@@ -21,15 +21,15 @@ export default function StoryCard (props) {
     const listTypographyVariant = 'body1';
 
     const editButtonHandler = () => {
-        // call url dynamically created with info for the storyID
+        // TODO call url dynamically created with info for the storyID
     }
 
     const deleteButtonHandler = () => {
-        // call API that deleted the story based on the storyID
+        // TODO call API that deleted the story based on the storyID
     }
 
     return (
-        <Card sx={{width: props.width}} >
+        <Card sx={{width: props.width, height: props.height}} >
             <CardHeader title={props.title} />
 
             <CardContent sx={{py:0}} >
@@ -71,7 +71,11 @@ export default function StoryCard (props) {
                 </List>
             </CardContent>
 
-            <Grid item container alignItems='flex-end' justify='flex-end' direction='column' >
+            {/* TODO have the edit and delete buttons provide tootip on hover */}
+
+            {/* TODO have the edit and delete button grid sticky at the bottom  */}
+
+            <Grid item container alignItems='flex-end' justify='flex-end' direction='column' align={'bottom'} >
                 <Box sx={{py:1, pr:1}} >
                     <IconButton aria-label="edit" onClick={editButtonHandler}>
                         <EditIcon />
