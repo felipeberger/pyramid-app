@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Layout from '../layout/layout';
 import Grid from '@mui/material/Grid';
 import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
