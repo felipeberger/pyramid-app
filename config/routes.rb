@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get '/explanation' => 'pages#explanation'
+  get '/story' => 'pages#storyPage'
   
   namespace :api do
 
