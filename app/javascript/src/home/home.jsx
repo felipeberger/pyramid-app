@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Grid from '@mui/material/Grid';
 import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
-import {handleErrors} from '../utils/fetchHelper';
+import { handleErrors } from '../utils/fetchHelper';
 import { useSelector } from 'react-redux';
 
 
@@ -39,7 +39,8 @@ export default function Home () {
             stories.map( story => {
                 return (
                     <Grid 
-                        item xs={12}
+                        item 
+                        xs={12}
                         md={6} 
                         xl={4} 
                         align='center' 
