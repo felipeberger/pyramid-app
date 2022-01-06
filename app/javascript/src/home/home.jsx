@@ -3,40 +3,46 @@ import Grid from '@mui/material/Grid';
 import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
 import { handleErrors } from '../utils/fetchHelper';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { updateAllStories } from '../../global_state/reducers/allStoriesSlice';
 
 export default function Home () {
-    const [stories, setStories] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
     // redux selector functions
     const retrieveUserId = state => state.userId
+    const retrieveActiveStory = state => state.activeStory
+    const retrieveAllStories = state => state.allStories
     
     // redux subscriptions (global state)
     const globalUserId = useSelector(retrieveUserId).userId
+    const globalActiveStory = useSelector(retrieveActiveStory)
+    const globalAllStories = useSelector(retrieveAllStories)
+
+    // dispatch constant to update redux store
+    const dispatch = useDispatch()
 
     // TODO useEffect triggers twice on load of page, fix so only loads once 
     useEffect( ()=> {
         fetch(`/api/stories/${globalUserId}/getall`)
             .then(handleErrors)
             .then(data => {
-                setStories(data.user.stories)
+                dispatch(updateAllStories(data.user.stories))
                 setLoaded(true)
             })
-    }, [loaded])
+    }, [])
 
     // constants used for UI dimensions
     const cardWidth = '450px';
     const cardHeight = '400px';
     
-
     const createStoryCards = () => {
         if (!loaded) return
-        if (!stories) return
+        if (!globalAllStories) return
+        console.log(globalAllStories)
         
         return (
-            stories.map( story => {
+            globalAllStories[0].map( story => {
                 return (
                     <Grid 
                         item 
