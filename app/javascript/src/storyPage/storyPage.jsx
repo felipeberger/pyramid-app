@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -8,6 +8,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Typography from '@mui/material/Typography';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { updateComplication, updateQuestion, updateSituation, updateAnswer } from "../../global_state/reducers/activeStorySlice";
+import { updateUserId } from "../../global_state/reducers/usersSlice";
 
 export default function StoryPage () {
 
@@ -19,39 +21,63 @@ export default function StoryPage () {
     const globalUserId = useSelector(retrieveUserId).userId
     const globalActiveStory = useSelector(retrieveActiveStory)
 
+    // dispatch constant to update redux store
+    const dispatch = useDispatch()
+
     const textChangeHandler = (e) => {
-        console.log(e.currentTarget.value)
+
         switch (e.currentTarget.id) {
-            case situation:
-                setSituation(e.currentTarget.value)                   
+            case "situation":
+                dispatch(updateSituation(e.currentTarget.value))
                 break;
-            case complication:
-                setComplication(e.currentTarget.value)                   
+            case "complication":
+                dispatch(updateComplication(e.currentTarget.value))
                 break;
-            case question:
-                setQuestion(e.currentTarget.value)                   
+            case "question":
+                dispatch(updateQuestion(e.currentTarget.value))
                 break;
-            case answer:
-                setAnswer(e.currentTarget.value)                   
+            case "answer":
+                dispatch(updateAnswer(e.currentTarget.value))   
                 break;
+
             case insight1:
-                setInsight1(e.currentTarget.value)                   
+                dispatch(updateInsight1(e.currentTarget.value))     
                 break;
             case insight2:
-                setInsight2(e.currentTarget.value)                   
+                dispatch(updateInsight2(e.currentTarget.value))     
                 break;
             case insight3:
-                setInsight3(e.currentTarget.value)                   
+                dispatch(updateInsight3(e.currentTarget.value))     
                 break;
 
             case support11:
-                setSuport11(e.currentTarget.value)                   
+                dispatch(updateSupport11(e.currentTarget.value))     
                 break;
             case support12:
-                setSupport12(e.currentTarget.value)                   
+                dispatch(updateSupport12(e.currentTarget.value))      
                 break;
-            case support1:
-                setSupport13(e.currentTarget.value)                   
+            case support13:
+                dispatch(updateSupport13(e.currentTarget.value))      
+                break;
+
+            case support21:
+                dispatch(updateSupport21(e.currentTarget.value))     
+                break;
+            case support22:
+                dispatch(updateSupport22(e.currentTarget.value))      
+                break;
+            case support23:
+                dispatch(updateSupport23(e.currentTarget.value))      
+                break;
+
+            case support31:
+                dispatch(updateSupport31(e.currentTarget.value))     
+                break;
+            case support32:
+                dispatch(updateSupport32(e.currentTarget.value))      
+                break;
+            case support33:
+                dispatch(updateSupport33(e.currentTarget.value))      
                 break;
 
             default:
@@ -93,14 +119,16 @@ export default function StoryPage () {
                     label="Complication" 
                     id="complication"
                     margin="normal"
-                    defaultValue="What has changed that this study is needed?"    
+                    defaultValue="What has changed that this study is needed?"
+                    onChange={textChangeHandler}    
                 />
                 <TextField 
                     fullWidth 
                     label="Question" 
                     id="question"
                     margin="normal"
-                    defaultValue="What issue are we trying to solve?"    
+                    defaultValue="What issue are we trying to solve?"
+                    onChange={textChangeHandler}    
                 />
             </Grid>
 
@@ -115,7 +143,8 @@ export default function StoryPage () {
                     label="Answer" 
                     id="answer"
                     margin="normal"
-                    defaultValue="What is your main argument?"    
+                    defaultValue="What is your main argument?"
+                    onChange={textChangeHandler}    
                 />
             </Grid>
 

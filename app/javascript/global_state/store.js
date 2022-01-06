@@ -4,7 +4,7 @@ import activeStoryReducer from './reducers/activeStorySlice'
 
 export const store = configureStore({
     reducer: {
-        userId: userReducer,
-        activeStory: activeStoryReducer 
+        activeStory: activeStoryReducer, 
+        userId: userReducer
     }
 })

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    situation: "test",
+    situation: "",
     complication: "",
     question: "",
     answer: "",
@@ -23,7 +23,7 @@ const activeStorySlice = createSlice({
     name: "activeStory",
     initialState,
     reducers: {
-        updateSitutation(state, action) {
+        updateSituation(state, action) {
             state.situation = action.payload
         },
         updateComplication(state, action) {
