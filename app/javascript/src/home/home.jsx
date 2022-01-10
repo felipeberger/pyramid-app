@@ -3,31 +3,18 @@ import Grid from '@mui/material/Grid';
 import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
 import { handleErrors } from '../utils/fetchHelper';
-import { useSelector, useDispatch } from 'react-redux';
 import { updateAllStories } from '../../global_state/reducers/allStoriesSlice';
 
 export default function Home () {
     const [loaded, setLoaded] = useState(false);
+    const [allStories, setAllStories] = useState([])
 
-    // redux selector functions
-    const retrieveUserId = state => state.userId
-    const retrieveActiveStory = state => state.activeStory
-    const retrieveAllStories = state => state.allStories
-    
-    // redux subscriptions (global state)
-    const globalUserId = useSelector(retrieveUserId).userId
-    const globalActiveStory = useSelector(retrieveActiveStory)
-    const globalAllStories = useSelector(retrieveAllStories)
-
-    // dispatch constant to update redux store
-    const dispatch = useDispatch()
-
-    // TODO useEffect triggers twice on load of page, fix so only loads once 
     useEffect( ()=> {
-        fetch(`/api/stories/${globalUserId}/getall`)
+        fetch(`/api/stories/${1}/getall`)
             .then(handleErrors)
             .then(data => {
                 dispatch(updateAllStories(data.user.stories))
+                setAllStories(data.user.stories)
                 setLoaded(true)
             })
     }, [])
@@ -38,11 +25,11 @@ export default function Home () {
     
     const createStoryCards = () => {
         if (!loaded) return
-        if (!globalAllStories) return
-        console.log(globalAllStories)
+        if (!allStories) return
+        console.log(allStories)
         
         return (
-            globalAllStories[0].map( story => {
+            allStories.map( (story, index) => {
                 return (
                     <Grid 
                         item 
@@ -50,20 +37,20 @@ export default function Home () {
                         md={6} 
                         xl={4} 
                         align='center' 
-                        key={story.storyId? story.storyId : "" }
+                        key={story.storyId}
                         px={1}
                         py={2} 
                     >
                         {/* checking array has own property answer obtained from https://stackoverflow.com/questions/13107855/how-to-check-if-an-array-index-exists-or-not-in-javascript
-
                         Did not use the most upvoted answer but the one that suggests using object inheritance as an array in JS is just an object under the hood */}
                          <StoryCard 
                             width={cardWidth}
                             height={cardHeight}
-                            title={story.answer? story.answer : "ANSWER" } 
+                            answer={story.answer? story.answer : "ANSWER" } 
                             firstInsight={story.insights.hasOwnProperty(0) ? story.insights[0].insight : "INSIGHT"  } 
                             secondInsight={story.insights.hasOwnProperty(1) ? story.insights[1].insight : "INSIGHT" } 
-                            thirdInsight={story.insights.hasOwnProperty(2) ? story.insights[2].insight : "INSIGHT"} 
+                            thirdInsight={story.insights.hasOwnProperty(2) ? story.insights[2].insight : "INSIGHT"}
+                            storyId={story.storyId}
                         />
                     </Grid>
                 )

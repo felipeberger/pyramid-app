@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import { useSelector, useDispatch } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -8,81 +7,69 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Typography from '@mui/material/Typography';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { updateComplication, updateQuestion, updateSituation, updateAnswer } from "../../global_state/reducers/activeStorySlice";
-import { updateUserId } from "../../global_state/reducers/usersSlice";
 
 export default function StoryPage () {
-
-    // redux selector functions
-    const retrieveUserId = state => state.userId
-    const retrieveActiveStory = state => state.activeStory
-    
-    // redux subscriptions (global state)
-    const globalUserId = useSelector(retrieveUserId).userId
-    const globalActiveStory = useSelector(retrieveActiveStory)
-
-    // dispatch constant to update redux store
-    const dispatch = useDispatch()
+    const [situation, setSituation] = useState("")
 
     const textChangeHandler = (e) => {
 
-        switch (e.currentTarget.id) {
-            case "situation":
-                dispatch(updateSituation(e.currentTarget.value))
-                break;
-            case "complication":
-                dispatch(updateComplication(e.currentTarget.value))
-                break;
-            case "question":
-                dispatch(updateQuestion(e.currentTarget.value))
-                break;
-            case "answer":
-                dispatch(updateAnswer(e.currentTarget.value))   
-                break;
+        // switch (e.currentTarget.id) {
+        //     case "situation":
+        //         dispatch(updateSituation(e.currentTarget.value))
+        //         break;
+        //     case "complication":
+        //         dispatch(updateComplication(e.currentTarget.value))
+        //         break;
+        //     case "question":
+        //         dispatch(updateQuestion(e.currentTarget.value))
+        //         break;
+        //     case "answer":
+        //         dispatch(updateAnswer(e.currentTarget.value))   
+        //         break;
 
-            case insight1:
-                dispatch(updateInsight1(e.currentTarget.value))     
-                break;
-            case insight2:
-                dispatch(updateInsight2(e.currentTarget.value))     
-                break;
-            case insight3:
-                dispatch(updateInsight3(e.currentTarget.value))     
-                break;
+        //     case insight1:
+        //         dispatch(updateInsight1(e.currentTarget.value))     
+        //         break;
+        //     case insight2:
+        //         dispatch(updateInsight2(e.currentTarget.value))     
+        //         break;
+        //     case insight3:
+        //         dispatch(updateInsight3(e.currentTarget.value))     
+        //         break;
 
-            case support11:
-                dispatch(updateSupport11(e.currentTarget.value))     
-                break;
-            case support12:
-                dispatch(updateSupport12(e.currentTarget.value))      
-                break;
-            case support13:
-                dispatch(updateSupport13(e.currentTarget.value))      
-                break;
+        //     case support11:
+        //         dispatch(updateSupport11(e.currentTarget.value))     
+        //         break;
+        //     case support12:
+        //         dispatch(updateSupport12(e.currentTarget.value))      
+        //         break;
+        //     case support13:
+        //         dispatch(updateSupport13(e.currentTarget.value))      
+        //         break;
 
-            case support21:
-                dispatch(updateSupport21(e.currentTarget.value))     
-                break;
-            case support22:
-                dispatch(updateSupport22(e.currentTarget.value))      
-                break;
-            case support23:
-                dispatch(updateSupport23(e.currentTarget.value))      
-                break;
+        //     case support21:
+        //         dispatch(updateSupport21(e.currentTarget.value))     
+        //         break;
+        //     case support22:
+        //         dispatch(updateSupport22(e.currentTarget.value))      
+        //         break;
+        //     case support23:
+        //         dispatch(updateSupport23(e.currentTarget.value))      
+        //         break;
 
-            case support31:
-                dispatch(updateSupport31(e.currentTarget.value))     
-                break;
-            case support32:
-                dispatch(updateSupport32(e.currentTarget.value))      
-                break;
-            case support33:
-                dispatch(updateSupport33(e.currentTarget.value))      
-                break;
+        //     case support31:
+        //         dispatch(updateSupport31(e.currentTarget.value))     
+        //         break;
+        //     case support32:
+        //         dispatch(updateSupport32(e.currentTarget.value))      
+        //         break;
+        //     case support33:
+        //         dispatch(updateSupport33(e.currentTarget.value))      
+        //         break;
 
-            default:
-                break;
-        }
+        //     default:
+        //         break;
+        // }
     }
 
     const supportingButtonHandler = (e) => {

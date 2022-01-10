@@ -1,17 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Layout from '../layout/layout';
-import { Provider } from 'react-redux';
-import { store } from '../../global_state/store';
 import StoryPage from './storyPage'
 
 document.addEventListener('DOMContentLoaded', () => {
+  const node = document.getElementById('params');
+  const data = JSON.parse(node.getAttribute('data-params'));
+
   ReactDOM.render(
-    <Provider store={store}>
       <Layout>
-        <StoryPage/>
-      </Layout>
-    </Provider>,
-    document.body.appendChild(document.createElement('div')),
+        <StoryPage storyId={data.storyId} />
+      </Layout>,
+    document.body.appendChild(document.createElement('div'))
   )
 })

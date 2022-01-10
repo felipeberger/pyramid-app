@@ -16,12 +16,12 @@ import Grid from '@mui/material/Grid';
 
 export default function StoryCard (props) {
 
-    const storyID = props.storyID;
+    const storyId = props.storyId;
     const listitemMinWidth = '5px';
     const listTypographyVariant = 'body1';
 
     const editButtonHandler = () => {
-        // TODO call url dynamically created with info for the storyID
+        window.location = `/story/${storyId}`
     }
 
     const deleteButtonHandler = () => {
@@ -30,7 +30,7 @@ export default function StoryCard (props) {
 
     return (
         <Card sx={{width: props.width, height: props.height}} >
-            <CardHeader title={props.title} />
+            <CardHeader title={props.answer} />
 
             <CardContent sx={{py:0}} >
                 <List disablePadding>
