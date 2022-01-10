@@ -9,7 +9,13 @@ json.user do
             json.complication story.complication
             json.question story.question
             json.answer story.answer
-            json.insights story.insights
+
+            json.insights do
+                json.array! story.insights do |insight|
+                    json.insight insight.insight
+                    json.arguments insight.arguments
+                end
+            end
 
         end
     end

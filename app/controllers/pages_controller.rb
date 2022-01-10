@@ -6,5 +6,10 @@ class PagesController < ApplicationController
   def explanation 
     render 'explanation'
   end
+
+  def storyPage
+    @data = { storyId: params[:storyId] }.to_json
+    render 'storyPage'
+  end
   
 end

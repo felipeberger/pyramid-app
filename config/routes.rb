@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get '/explanation' => 'pages#explanation'
-  get '/story' => 'pages#storyPage'
+  get '/story/:storyId' => 'pages#storyPage'
   
   namespace :api do
 
