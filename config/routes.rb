@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
 
     #Stories
+    get '/stories/:storyId' => 'stories#getStoryById'
     get '/stories/:userId/getall' => 'stories#getAllUserStories'
 
   end
