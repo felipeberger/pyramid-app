@@ -13,7 +13,6 @@ export default function Home () {
         fetch(`/api/stories/${1}/getall`)
             .then(handleErrors)
             .then(data => {
-                dispatch(updateAllStories(data.user.stories))
                 setAllStories(data.user.stories)
                 setLoaded(true)
             })
