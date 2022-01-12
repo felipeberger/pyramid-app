@@ -3,12 +3,12 @@ import Grid from '@mui/material/Grid';
 import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
 import { handleErrors } from '../utils/fetchHelper';
-import { updateAllStories } from '../../global_state/reducers/allStoriesSlice';
 
 export default function Home () {
     const [loaded, setLoaded] = useState(false);
     const [allStories, setAllStories] = useState([])
 
+    // TODO update user ID being passed to fetch (should be drawn from another API call to get logged in user ID)
     useEffect( ()=> {
         fetch(`/api/stories/${1}/getall`)
             .then(handleErrors)
