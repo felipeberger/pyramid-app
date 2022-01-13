@@ -57,6 +57,8 @@ class StoryPage extends React.Component {
         }
 
         const checkArgumentExists = (insightIndex, ArgumentIndex) => {
+            if (!checkInsightExists(insightIndex)) return false
+
             return storyDataObjectStart.insights[insightIndex].arguments.hasOwnProperty(ArgumentIndex)
         }
         

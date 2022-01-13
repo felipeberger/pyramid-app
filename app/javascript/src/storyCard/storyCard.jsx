@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function StoryCard (props) {
 
@@ -71,18 +72,20 @@ export default function StoryCard (props) {
                 </List>
             </CardContent>
 
-            {/* TODO have the edit and delete buttons provide tootip on hover */}
-
             {/* TODO have the edit and delete button grid sticky at the bottom  */}
 
             <Grid item container alignItems='flex-end' justify='flex-end' direction='column' align={'bottom'} >
                 <Box sx={{py:1, pr:1}} >
-                    <IconButton aria-label="edit" onClick={editButtonHandler}>
-                        <EditIcon />
-                    </IconButton>
-                    <IconButton aria-label="delete" onClick={deleteButtonHandler}>
-                        <DeleteIcon />
-                    </IconButton>
+                    <Tooltip title="Edit">
+                        <IconButton aria-label="edit" onClick={editButtonHandler}>
+                            <EditIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                        <IconButton aria-label="delete" onClick={deleteButtonHandler}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </Tooltip>
                 </Box>
             </Grid>
 
