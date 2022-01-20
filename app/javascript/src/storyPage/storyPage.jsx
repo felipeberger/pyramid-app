@@ -89,11 +89,11 @@ class StoryPage extends React.Component {
                 method: 'PUT',
                 body: JSON.stringify(this.state.storyData)
             }))
-                .then((handleErrors) => {
-                    console.log (handleErrors.statusText)
+                .then(handleErrors => {
+                    console.log (handleErrors)
                 })
-                .then(response => {
-                    console.log(response)
+                .then(res => {
+                    console.log("response: " + res)
                 })
 
         }

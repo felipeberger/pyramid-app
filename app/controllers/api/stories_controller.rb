@@ -50,8 +50,9 @@ module Api
                     argument.argument = matching_updated_argument[:argument]
                     argument.save!
                 end
-
             end
+
+            return render json: { success: "story saved successfully" }, status: :ok
         end
 
         private
