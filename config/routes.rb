@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     #Stories
     get '/stories/:storyId' => 'stories#getStoryById'
     get '/stories/:userId/getall' => 'stories#getAllUserStories'
+    put '/stories/saveStory/:storyId' => 'stories#saveStory'
 
   end
 
