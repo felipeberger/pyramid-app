@@ -18,9 +18,8 @@ export default function Home () {
             })
     }, [])
 
-    // constants used for UI dimensions
     const cardWidth = '450px';
-    const cardHeight = '400px';
+    const cardHeight = '475px';
     
     const createStoryCards = () => {
         if (!loaded) return

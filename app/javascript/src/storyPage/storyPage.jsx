@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -7,11 +7,12 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Typography from '@mui/material/Typography';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { handleErrors } from "../utils/fetchHelper";
+import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 
 class StoryPage extends React.Component {
     state = {
         storyData: {},
+        storyId: null,
         loaded: false
     }
 
@@ -21,6 +22,7 @@ class StoryPage extends React.Component {
             .then(data => {
                 this.setState({
                     storyData: data.story,
+                    storyId: this.props.storyId,
                     loaded: true
                 })
             })
@@ -30,10 +32,7 @@ class StoryPage extends React.Component {
         
         if (!this.state.loaded) return <p>loading...</p>
 
-        console.log(this.state.storyData)
-
         const storyDataObjectStart = this.state.storyData
-
         const {                     
             situation,
             complication,
@@ -42,14 +41,61 @@ class StoryPage extends React.Component {
         } = storyDataObjectStart
 
         const textChangeHandler = (e) => {
-            const storyDataKey = e.currentTarget.id
-            const storyDataValue = e.currentTarget.value
-            this.setState({...storyDataObjectStart, [storyDataKey]: storyDataValue })
+            const textFieldId = e.currentTarget.id
+            const textFieldValue = e.currentTarget.value
+
+            if (textFieldId.includes('insight')) {
+                const insightUpdatedTextfieldId = parseInt(textFieldId.replace('insight', ''))
+                const insightUpdatedStateIndex = insightUpdatedTextfieldId - 1
+                
+                this.setState(prevState => ({
+                    storyData: {...prevState.storyData, 
+                        insights: {...prevState.storyData.insights, [insightUpdatedStateIndex]: {...prevState.storyData.insights[insightUpdatedStateIndex], 
+                            insight: textFieldValue} }}
+                }))
+                return
+            } 
+
+            if (textFieldId.includes('support')) {
+                const argumentAndIndex = textFieldId.replace('support', '')
+                const argumentUpdatedBelongsToWhichInsightIndex = parseInt(argumentAndIndex.charAt(0)) -1
+                const argumentUpdatedStateIndex = parseInt(argumentAndIndex.charAt(1)) -1
+
+                let argumentsCopy = [...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments]
+                let updatedArgument = {...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments[argumentUpdatedStateIndex]}
+                updatedArgument.argument = textFieldValue
+                argumentsCopy[argumentUpdatedStateIndex] = updatedArgument
+
+                this.setState(prevState => ({
+                    storyData: {...prevState.storyData, 
+                        insights: {...prevState.storyData.insights, [argumentUpdatedBelongsToWhichInsightIndex]: {...prevState.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex], arguments: argumentsCopy } }}
+                }))
+                return
+            }
+            
+            this.setState(prevState => ({
+                storyData: {...prevState.storyData, [textFieldId]: textFieldValue }
+            }))
+            
         }
         
         const addSupportingDataButtonHandler = (e) => {
             // TODO add handler
             console.log(e.currentTarget.id)
+        }
+
+        const saveStory = (e) => {
+            fetch(`/api/stories/saveStory/${this.state.storyId}`, safeCredentials({
+                method: 'PUT',
+                body: JSON.stringify(this.state.storyData)
+            }))
+                .then((handleErrors) => {
+                    console.log (handleErrors.statusText)
+                })
+                .then(response => {
+                    console.log(response)
+                })
+
         }
 
         const checkInsightExists = (insightIndex) => {
@@ -92,6 +138,9 @@ class StoryPage extends React.Component {
                 alignContent='center' 
                 justify='center'
             >
+                <Button onClick={saveStory}>
+                    Save
+                </Button>
                 <Grid
                     item
                     width='70%'
@@ -174,8 +223,9 @@ class StoryPage extends React.Component {
                         id="insight1"
                         margin="normal"
                         defaultValue={insight1? insight1 : "What is your first insight?"}
+                        onChange={textChangeHandler}
                         multiline
-                        rows={inputHeightForInsights} 
+                        rows={inputHeightForInsights}
                     />
 
                     <ArrowUpwardIcon />
@@ -206,6 +256,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support11? support11 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -230,6 +281,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support12? support12 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -254,6 +306,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support13? support13 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -288,6 +341,7 @@ class StoryPage extends React.Component {
                         id="insight2"
                         margin="normal"
                         defaultValue={insight2? insight2 : "What is your second insight?"}
+                        onChange={textChangeHandler}
                         multiline
                         rows={inputHeightForInsights}
                     />
@@ -320,6 +374,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support21? support21 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -344,6 +399,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support22? support22 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -368,6 +424,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support23? support23 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -401,6 +458,7 @@ class StoryPage extends React.Component {
                         id="insight3"
                         margin="normal"
                         defaultValue={insight3? insight3 : "What is your first insight?"}
+                        onChange={textChangeHandler}
                         multiline
                         rows={inputHeightForInsights}
                     />
@@ -433,6 +491,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support31? support31 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -457,6 +516,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support32? support32 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
@@ -481,6 +541,7 @@ class StoryPage extends React.Component {
                                     margin="normal"
                                     defaultValue={support33? support33 : "Supporting information"}
                                     fullWidth
+                                    onChange={textChangeHandler}
                                     multiline
                                     rows={inputHeightForSupport}
                                 />
