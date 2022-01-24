@@ -11,5 +11,9 @@ class PagesController < ApplicationController
     @data = { storyId: params[:storyId] }.to_json
     render 'storyPage'
   end
+
+  def argument
+    render 'argument'
+  end
   
 end
