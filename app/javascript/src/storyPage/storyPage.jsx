@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Typography from '@mui/material/Typography';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 
 class StoryPage extends React.Component {
@@ -89,11 +88,9 @@ class StoryPage extends React.Component {
                 method: 'PUT',
                 body: JSON.stringify(this.state.storyData)
             }))
-                .then(handleErrors => {
-                    console.log (handleErrors)
-                })
+                .then(handleErrors)
                 .then(res => {
-                    console.log("response: " + res)
+                    console.log(res.success)
                 })
 
         }
