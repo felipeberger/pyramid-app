@@ -1,11 +1,7 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Typography from '@mui/material/Typography';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 import InsightAndArguments from "./insightAndArguments";
 
@@ -32,41 +28,40 @@ class StoryPage extends React.Component {
         
         if (!this.state.loaded) return <p>loading...</p>
 
+        const inputHeightForSituationComplicationQuestionAnswer = 2
+        
         const storyDataObjectStart = this.state.storyData
+
         const {                     
             situation,
             complication,
             question,
             answer
         } = storyDataObjectStart
-        
-        const inputHeightForSituationComplicationQuestionAnswer = 2
-        
-        const checkInsightExists = (insightIndex) => {
-            return storyDataObjectStart.insights.hasOwnProperty(insightIndex)
+
+        const insightsAndArguments = {
+            insight1 : storyDataObjectStart.insights[0].insight,
+            support11 : storyDataObjectStart.insights[0].arguments[0].argument,
+            explanation11 : storyDataObjectStart.insights[0].arguments[0].explanation,
+            support12 : storyDataObjectStart.insights[0].arguments[1].argument,
+            explanation12 : storyDataObjectStart.insights[0].arguments[1].explanation,
+            support13 : storyDataObjectStart.insights[0].arguments[2].argument,
+            explanation13 : storyDataObjectStart.insights[0].arguments[2].explanation,
+            insight2 : storyDataObjectStart.insights[1].insight,
+            support21 : storyDataObjectStart.insights[1].arguments[0].argument,
+            explanation21 : storyDataObjectStart.insights[1].arguments[0].explanation,
+            support22 : storyDataObjectStart.insights[1].arguments[1].argument,
+            explanation22 : storyDataObjectStart.insights[1].arguments[1].explanation,
+            support23 : storyDataObjectStart.insights[1].arguments[2].argument,
+            explanation23 : storyDataObjectStart.insights[1].arguments[2].explanation,
+            insight3 : storyDataObjectStart.insights[2].insight,
+            support31 : storyDataObjectStart.insights[2].arguments[0].argument,
+            explanation31 : storyDataObjectStart.insights[2].arguments[0].explanation,
+            support32 : storyDataObjectStart.insights[2].arguments[1].argument,
+            explanation32 : storyDataObjectStart.insights[2].arguments[1].explanation,
+            support33 : storyDataObjectStart.insights[2].arguments[2].argument,
+            explanation33 : storyDataObjectStart.insights[2].arguments[2].explanation
         }
-
-        const checkArgumentExists = (insightIndex, ArgumentIndex) => {
-            if (!checkInsightExists(insightIndex)) return false
-
-            return storyDataObjectStart.insights[insightIndex].arguments.hasOwnProperty(ArgumentIndex)
-        }
-        
-        const insight1 = checkInsightExists(0)? storyDataObjectStart.insights[0].insight : ""
-        const support11 = checkArgumentExists(0,0)? storyDataObjectStart.insights[0].arguments[0].argument : ""
-        const support12 = checkArgumentExists(0,1)? storyDataObjectStart.insights[0].arguments[1].argument : ""
-        const support13 = checkArgumentExists(0,2)? storyDataObjectStart.insights[0].arguments[2].argument : ""
-
-        const insight2 = checkInsightExists(1)? storyDataObjectStart.insights[1].insight : ""
-        const support21 = checkArgumentExists(1,0)? storyDataObjectStart.insights[1].arguments[0].argument : ""
-        const support22 = checkArgumentExists(1,1)? storyDataObjectStart.insights[1].arguments[1].argument : ""
-        const support23 = checkArgumentExists(1,2)? storyDataObjectStart.insights[1].arguments[2].argument : ""
-
-        const insight3 = checkInsightExists(2)? storyDataObjectStart.insights[2].insight : ""
-        const support31 = checkArgumentExists(2,0)? storyDataObjectStart.insights[2].arguments[0].argument : ""
-        const support32 = checkArgumentExists(2,1)? storyDataObjectStart.insights[2].arguments[1].argument : ""
-        const support33 = checkArgumentExists(2,2)? storyDataObjectStart.insights[2].arguments[2].argument : ""
-
 
         const textChangeHandler = (e) => {
             const textFieldId = e.currentTarget.id
@@ -75,28 +70,33 @@ class StoryPage extends React.Component {
             if (textFieldId.includes('insight')) {
                 const insightUpdatedTextfieldId = parseInt(textFieldId.replace('insight', ''))
                 const insightUpdatedStateIndex = insightUpdatedTextfieldId - 1
+                let insightsCopy = [...this.state.storyData.insights]
+                let updatedInsight = {...this.state.storyData.insights[insightUpdatedStateIndex]}
+                updatedInsight.insight = textFieldValue
+                insightsCopy[insightUpdatedStateIndex] = updatedInsight
                 
                 this.setState(prevState => ({
                     storyData: {...prevState.storyData, 
-                        insights: {...prevState.storyData.insights, [insightUpdatedStateIndex]: {...prevState.storyData.insights[insightUpdatedStateIndex], 
-                            insight: textFieldValue} }}
+                        insights: [...insightsCopy] }
                 }))
                 return
             } 
 
-            if (textFieldId.includes('support')) {
-                const argumentAndIndex = textFieldId.replace('support', '')
+            if (textFieldId.includes('support') || textFieldId.includes('explanation') ) {
+                const argumentAndIndex = textFieldId.includes('support') ? textFieldId.replace('support', '') : textFieldId.replace('explanation', '')
                 const argumentUpdatedBelongsToWhichInsightIndex = parseInt(argumentAndIndex.charAt(0)) -1
                 const argumentUpdatedStateIndex = parseInt(argumentAndIndex.charAt(1)) -1
 
                 let argumentsCopy = [...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments]
                 let updatedArgument = {...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments[argumentUpdatedStateIndex]}
-                updatedArgument.argument = textFieldValue
+                textFieldId.includes('support') ? updatedArgument.argument = textFieldValue : updatedArgument.explanation = textFieldValue
                 argumentsCopy[argumentUpdatedStateIndex] = updatedArgument
+                let insightAndArgumentsCopy = [...this.state.storyData.insights]
+                insightAndArgumentsCopy[argumentUpdatedBelongsToWhichInsightIndex].arguments = [...argumentsCopy]
 
                 this.setState(prevState => ({
                     storyData: {...prevState.storyData, 
-                        insights: {...prevState.storyData.insights, [argumentUpdatedBelongsToWhichInsightIndex]: {...prevState.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex], arguments: argumentsCopy } }}
+                        insights: [...insightAndArgumentsCopy ]}
                 }))
                 return
             }
@@ -119,21 +119,22 @@ class StoryPage extends React.Component {
             }))
                 .then(handleErrors)
                 .then(res => {
+                    // TODO add indicator that data has been saved
                     console.log(res.success)
                 })
 
         } 
 
         const renderInsightsAndArguments = () => {
-            let insightsAndArguments = []
+            let insightsAndArgumentComponents = []
 
             for (let i = 1; i <= 3; i++) {
-                insightsAndArguments.push(
-                    <InsightAndArguments key={i} insightId={i} textChangeHandler={textChangeHandler} addSupportingDataButtonHandler={addSupportingDataButtonHandler} insightValue={window[`insight${i}`]} support1={window[`support${i}1`]} support2={window[`support${i}2`]} support3={window[`support${i}3`]} />
+                insightsAndArgumentComponents.push(
+                    <InsightAndArguments key={i} insightId={i} textChangeHandler={textChangeHandler} addSupportingDataButtonHandler={addSupportingDataButtonHandler} insightValue={insightsAndArguments[`insight${i}`]} support1={insightsAndArguments[`support${i}1`]} support2={insightsAndArguments[`support${i}2`]} support3={insightsAndArguments[`support${i}3`]} explanation1={insightsAndArguments[`explanation${i}1`]} explanation2={insightsAndArguments[`explanation${i}2`]} explanation3={insightsAndArguments[`explanation${i}3`]} />
                 )
             }
 
-            return insightsAndArguments
+            return insightsAndArgumentComponents
         }
 
         return (
