@@ -1,7 +1,8 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import LoopIcon from '@mui/icons-material/Loop';
+import { Typography } from "@mui/material";
 import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 import InsightAndArguments from "./insightAndArguments";
 
@@ -9,7 +10,8 @@ class StoryPage extends React.Component {
     state = {
         storyData: {},
         storyId: null,
-        loaded: false
+        loaded: false,
+        uploading: false
     }
 
     componentDidMount() {
@@ -19,7 +21,8 @@ class StoryPage extends React.Component {
                 this.setState({
                     storyData: data.story,
                     storyId: this.props.storyId,
-                    loaded: true
+                    loaded: true,
+                    dataSaved: true
                 })
             })
     }
@@ -47,6 +50,7 @@ class StoryPage extends React.Component {
             explanation12 : storyDataObjectStart.insights[0].arguments[1].explanation,
             support13 : storyDataObjectStart.insights[0].arguments[2].argument,
             explanation13 : storyDataObjectStart.insights[0].arguments[2].explanation,
+
             insight2 : storyDataObjectStart.insights[1].insight,
             support21 : storyDataObjectStart.insights[1].arguments[0].argument,
             explanation21 : storyDataObjectStart.insights[1].arguments[0].explanation,
@@ -54,6 +58,7 @@ class StoryPage extends React.Component {
             explanation22 : storyDataObjectStart.insights[1].arguments[1].explanation,
             support23 : storyDataObjectStart.insights[1].arguments[2].argument,
             explanation23 : storyDataObjectStart.insights[1].arguments[2].explanation,
+
             insight3 : storyDataObjectStart.insights[2].insight,
             support31 : storyDataObjectStart.insights[2].arguments[0].argument,
             explanation31 : storyDataObjectStart.insights[2].arguments[0].explanation,
@@ -63,66 +68,78 @@ class StoryPage extends React.Component {
             explanation33 : storyDataObjectStart.insights[2].arguments[2].explanation
         }
 
+        let typingTimeout
+
         const textChangeHandler = (e) => {
+
+            clearTimeout(typingTimeout)
             const textFieldId = e.currentTarget.id
             const textFieldValue = e.currentTarget.value
 
-            if (textFieldId.includes('insight')) {
-                const insightUpdatedTextfieldId = parseInt(textFieldId.replace('insight', ''))
-                const insightUpdatedStateIndex = insightUpdatedTextfieldId - 1
-                let insightsCopy = [...this.state.storyData.insights]
-                let updatedInsight = {...this.state.storyData.insights[insightUpdatedStateIndex]}
-                updatedInsight.insight = textFieldValue
-                insightsCopy[insightUpdatedStateIndex] = updatedInsight
+            typingTimeout = setTimeout(()=>{
+
+                if (textFieldId.includes('insight')) {
+                    const insightUpdatedTextfieldId = parseInt(textFieldId.replace('insight', ''))
+                    const insightUpdatedStateIndex = insightUpdatedTextfieldId - 1
+                    let insightsCopy = [...this.state.storyData.insights]
+                    let updatedInsight = {...this.state.storyData.insights[insightUpdatedStateIndex]}
+                    updatedInsight.insight = textFieldValue
+                    insightsCopy[insightUpdatedStateIndex] = updatedInsight
+                    
+                    this.setState(prevState => ({
+                        storyData: {...prevState.storyData, 
+                            insights: [...insightsCopy] }
+                    }))
+                    saveStory()
+                    return
+                } 
+    
+                if (textFieldId.includes('support') || textFieldId.includes('explanation') ) {
+                    const argumentAndIndex = textFieldId.includes('support') ? textFieldId.replace('support', '') : textFieldId.replace('explanation', '')
+                    const argumentUpdatedBelongsToWhichInsightIndex = parseInt(argumentAndIndex.charAt(0)) -1
+                    const argumentUpdatedStateIndex = parseInt(argumentAndIndex.charAt(1)) -1
+    
+                    let argumentsCopy = [...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments]
+                    let updatedArgument = {...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments[argumentUpdatedStateIndex]}
+                    textFieldId.includes('support') ? updatedArgument.argument = textFieldValue : updatedArgument.explanation = textFieldValue
+                    argumentsCopy[argumentUpdatedStateIndex] = updatedArgument
+                    let insightAndArgumentsCopy = [...this.state.storyData.insights]
+                    insightAndArgumentsCopy[argumentUpdatedBelongsToWhichInsightIndex].arguments = [...argumentsCopy]
+    
+                    this.setState(prevState => ({
+                        storyData: {...prevState.storyData, 
+                            insights: [...insightAndArgumentsCopy ]}
+                    }))
+                    saveStory()
+
+                    return
+                }
                 
                 this.setState(prevState => ({
-                    storyData: {...prevState.storyData, 
-                        insights: [...insightsCopy] }
+                    storyData: {...prevState.storyData, [textFieldId]: textFieldValue }
                 }))
-                return
-            } 
+                saveStory()
 
-            if (textFieldId.includes('support') || textFieldId.includes('explanation') ) {
-                const argumentAndIndex = textFieldId.includes('support') ? textFieldId.replace('support', '') : textFieldId.replace('explanation', '')
-                const argumentUpdatedBelongsToWhichInsightIndex = parseInt(argumentAndIndex.charAt(0)) -1
-                const argumentUpdatedStateIndex = parseInt(argumentAndIndex.charAt(1)) -1
+            }, 500)
 
-                let argumentsCopy = [...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments]
-                let updatedArgument = {...this.state.storyData.insights[argumentUpdatedBelongsToWhichInsightIndex].arguments[argumentUpdatedStateIndex]}
-                textFieldId.includes('support') ? updatedArgument.argument = textFieldValue : updatedArgument.explanation = textFieldValue
-                argumentsCopy[argumentUpdatedStateIndex] = updatedArgument
-                let insightAndArgumentsCopy = [...this.state.storyData.insights]
-                insightAndArgumentsCopy[argumentUpdatedBelongsToWhichInsightIndex].arguments = [...argumentsCopy]
-
-                this.setState(prevState => ({
-                    storyData: {...prevState.storyData, 
-                        insights: [...insightAndArgumentsCopy ]}
-                }))
-                return
-            }
-            
-            this.setState(prevState => ({
-                storyData: {...prevState.storyData, [textFieldId]: textFieldValue }
-            }))
-            
-        }
-        
-        const addSupportingDataButtonHandler = (e) => {
-            // TODO add handler
-            console.log(e.currentTarget.id)
         }
 
-        const saveStory = (e) => {
+        const saveStory = () => {
+            this.setState({
+                uploading: true
+            })
+
             fetch(`/api/stories/saveStory/${this.state.storyId}`, safeCredentials({
                 method: 'PUT',
                 body: JSON.stringify(this.state.storyData)
             }))
                 .then(handleErrors)
                 .then(res => {
-                    // TODO add indicator that data has been saved
                     console.log(res.success)
+                    this.setState({
+                        uploading: false
+                    })
                 })
-
         } 
 
         const renderInsightsAndArguments = () => {
@@ -130,7 +147,7 @@ class StoryPage extends React.Component {
 
             for (let i = 1; i <= 3; i++) {
                 insightsAndArgumentComponents.push(
-                    <InsightAndArguments key={i} insightId={i} textChangeHandler={textChangeHandler} addSupportingDataButtonHandler={addSupportingDataButtonHandler} insightValue={insightsAndArguments[`insight${i}`]} support1={insightsAndArguments[`support${i}1`]} support2={insightsAndArguments[`support${i}2`]} support3={insightsAndArguments[`support${i}3`]} explanation1={insightsAndArguments[`explanation${i}1`]} explanation2={insightsAndArguments[`explanation${i}2`]} explanation3={insightsAndArguments[`explanation${i}3`]} />
+                    <InsightAndArguments key={i} insightId={i} textChangeHandler={textChangeHandler} insightValue={insightsAndArguments[`insight${i}`]} support1={insightsAndArguments[`support${i}1`]} support2={insightsAndArguments[`support${i}2`]} support3={insightsAndArguments[`support${i}3`]} explanation1={insightsAndArguments[`explanation${i}1`]} explanation2={insightsAndArguments[`explanation${i}2`]} explanation3={insightsAndArguments[`explanation${i}3`]} />
                 )
             }
 
@@ -139,6 +156,19 @@ class StoryPage extends React.Component {
 
         return (
             <>
+            {this.state.uploading === true &&
+                <Grid
+                    container                    
+                    sx={{zIndex: 'tooltip', position: 'absolute', py: 2}}
+                    display='flex'
+                    alignItems='center'
+                    flexWrap='wrap'
+                >
+                    <LoopIcon sx={{color: 'green', height:'30px', width: '30px'}} />
+                    <Typography sx={{color: 'green'}}>Saving</Typography>
+                </Grid>
+            }
+
             <Grid
                 container
                 item
@@ -147,9 +177,6 @@ class StoryPage extends React.Component {
                 alignContent='center' 
                 justify='center'
             >
-                <Button onClick={saveStory}>
-                    Save
-                </Button>
                 <Grid
                     item
                     width='70%'
