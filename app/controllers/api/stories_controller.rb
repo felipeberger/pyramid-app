@@ -31,7 +31,7 @@ module Api
             @user = User.find_by(id: 1)
             @story = Story.find_by(id: params[:storyId])
             # to_unsafe_h is needed to used .find  
-            data_insights = params[:insights].to_unsafe_h
+            data_insights = params[:insights]
 
             @story.situation = params[:situation]
             @story.complication = params[:complication]
@@ -40,14 +40,17 @@ module Api
             @story.save!
 
             @story.insights.each do |insight_record|
-                updated_insight = data_insights.find { |key, value| value[:insightId] == insight_record.id }
+                updated_insight = data_insights.find { |value| value[:insightId] == insight_record.id }
                 # .find returns an array [key, {value}] so [1] is needed to access the value hash
-                insight_record.insight = updated_insight[1][:insight] 
+                puts "----------"
+                puts updated_insight
+                insight_record.insight = updated_insight[:insight] 
                 insight_record.save!
 
                 insight_record.arguments.each do |argument|
-                    matching_updated_argument = updated_insight[1][:arguments].find { |data| data[:id] == argument.id }
+                    matching_updated_argument = updated_insight[:arguments].find { |data| data[:argumentId] == argument.id }
                     argument.argument = matching_updated_argument[:argument]
+                    argument.explanation = matching_updated_argument[:explanation]
                     argument.save!
                 end
             end

@@ -9,7 +9,15 @@ json.story do
         json.array! @story.insights do |insight|
             json.insightId insight.id
             json.insight insight.insight
-            json.arguments insight.arguments
+
+            json.arguments do
+                json.array! insight.arguments do |argument|
+                    json.argumentId argument.id
+                    json.argument argument.argument
+                    json.explanation argument.explanation
+                end
+            end
+            
         end
     end
 end
