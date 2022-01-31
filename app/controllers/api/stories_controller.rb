@@ -30,7 +30,6 @@ module Api
             # TODO user ID needs to be fetched from session data
             @user = User.find_by(id: 1)
             @story = Story.find_by(id: params[:storyId])
-            # to_unsafe_h is needed to used .find  
             data_insights = params[:insights]
 
             @story.situation = params[:situation]
@@ -41,9 +40,6 @@ module Api
 
             @story.insights.each do |insight_record|
                 updated_insight = data_insights.find { |value| value[:insightId] == insight_record.id }
-                # .find returns an array [key, {value}] so [1] is needed to access the value hash
-                puts "----------"
-                puts updated_insight
                 insight_record.insight = updated_insight[:insight] 
                 insight_record.save!
 
