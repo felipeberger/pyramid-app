@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_12_230722) do
+ActiveRecord::Schema.define(version: 2022_01_31_043824) do
 
   create_table "arguments", force: :cascade do |t|
     t.string "argument"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2021_12_12_230722) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "insight_id"
-    t.json "data"
     t.index ["insight_id"], name: "index_arguments_on_insight_id"
   end
 

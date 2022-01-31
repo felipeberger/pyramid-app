@@ -24,8 +24,15 @@ insights = Insight.create([
 ])
 
 arguments = Argument.create([
-    {argument:'Parking costs are a large part of cost of ownership in urban areas',explanation:'The cost of parking has increased by an average of 10% YoY over the last decade in major urban areas',insight: insights.first,data:{'title': 'Cost of parking in US cities', 'rows':[['Year','2010','2011','2012','2013'],['new york', '300','315','350','360'], ['chicago','200','215','250','260']] }},
-    {argument:'Repair cost for cars of more than 5 years of age are 200% higher per year than for newer cars',explanation:'Once cars pass the 5 year mark, the cost to repair increases dramatically, which makes the cost of ownership higher than for new cars, even if the initial cost is lower',insight:insights.first,data:{'title': 'Car maintenance cost', 'rows': [['Year', '2010', '2011', '2012', '2013', '2014'], ['repair cost', '300','315','350','360', '375']] }},
-    {argument:'Wages for most common jobs have not increased in line with inflation, while the price for used cars has tracked inflation over the same time period',explanation: 'Used cars used to be the accessible option for workers in lower wage positions, but the cost of purchase is now out of reach for many workers who might have considered buying one in the past',insight:insights.first,data:{'title': 'Cost of used car as proportion of average monthly wages', 'rows': [['Year', '2010', '2011', '2012', '2013'],['wages','2000','2000','2050','2050'], ['purchase cost', '4000', '4300', '4500', '5000']] }}
+    {argument:'Parking costs are a large part of cost of ownership in urban areas',explanation:'The cost of parking has increased by an average of 10% YoY over the last decade in major urban areas',insight: insights.first },
+    {argument:'Repair cost for cars of more than 5 years of age are 200% higher per year than for newer cars',explanation:'Once cars pass the 5 year mark, the cost to repair increases dramatically, which makes the cost of ownership higher than for new cars, even if the initial cost is lower', insight: insights.first },
+    {argument:'Wages for most common jobs have not increased in line with inflation, while the price for used cars has tracked inflation over the same time period',explanation: 'Used cars used to be the accessible option for workers in lower wage positions, but the cost of purchase is now out of reach for many workers who might have considered buying one in the past',insight: insights.first },
+    {argument: '',explanation: '', insight: insights.second },
+    {argument: '',explanation: '', insight: insights.second },
+    {argument: '',explanation: '', insight: insights.second },
+    {argument: '',explanation: '', insight: insights.third, },
+    {argument: '',explanation: '', insight: insights.third, },
+    {argument: '',explanation: '', insight: insights.third, },
+    
 ])
 
