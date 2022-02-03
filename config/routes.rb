@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/explanation' => 'pages#explanation'
   get '/story/:storyId' => 'pages#storyPage'
+  get '/story/:storyId/slideshow' => 'pages#slideshow'
   
   namespace :api do
 

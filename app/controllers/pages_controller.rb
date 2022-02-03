@@ -12,8 +12,9 @@ class PagesController < ApplicationController
     render 'storyPage'
   end
 
-  def argument
-    render 'argument'
+  def slideshow
+    @data = { storyId: params[:storyId] }.to_json
+    render 'slideshow'
   end
   
 end
