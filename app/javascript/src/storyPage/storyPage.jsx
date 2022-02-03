@@ -5,11 +5,11 @@ import LoopIcon from '@mui/icons-material/Loop';
 import { Typography } from "@mui/material";
 import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 import InsightAndArguments from "./insightAndArguments";
+import Button from '@mui/material/Button';
 
 class StoryPage extends React.Component {
     state = {
         storyData: {},
-        storyId: null,
         loaded: false,
         uploading: false
     }
@@ -20,7 +20,6 @@ class StoryPage extends React.Component {
             .then(data => {
                 this.setState({
                     storyData: data.story,
-                    storyId: this.props.storyId,
                     loaded: true,
                     dataSaved: true
                 })
@@ -30,6 +29,8 @@ class StoryPage extends React.Component {
     render () {
         
         if (!this.state.loaded) return <p>loading...</p>
+
+        const storyId = this.props.storyId
 
         const inputHeightForSituationComplicationQuestionAnswer = 2
         
@@ -124,6 +125,10 @@ class StoryPage extends React.Component {
 
         }
 
+        const slideshowButtonHandler = () => {
+            window.location = `/story/${storyId}/slideshow`
+        }
+
         const saveStory = () => {
             this.setState({
                 uploading: true
@@ -168,6 +173,14 @@ class StoryPage extends React.Component {
                     <Typography sx={{color: 'green'}}>Saving</Typography>
                 </Grid>
             }
+
+            <Grid
+                container
+                justifyContent='center'
+                pt={2}
+            >
+                <Button variant="outlined" onClick={slideshowButtonHandler}>See Story Slideshow</Button>
+            </Grid>
 
             <Grid
                 container
@@ -244,7 +257,16 @@ class StoryPage extends React.Component {
             >
                 {renderInsightsAndArguments()}
             </ Grid>
-            </>
+
+
+            <Grid
+                container
+                justifyContent='center'
+                py={2}
+            >
+                <Button variant="outlined" onClick={slideshowButtonHandler}>See Story Slideshow</Button>
+            </Grid>
+            </>            
         )
     }
 }
