@@ -5,16 +5,42 @@ module Api
         
         # TODO add security (check user is logged in and is the owner of stories for example)
 
-        def create
-            # TODO placeholder for create api call
-        end
-
         def getAllUserStories
 
+            # TODO change so userId is obtained from session data
             @user = User.find_by(id: params[:userId])
             return render json: { error: 'not_found' }, status: :not_found if !@user 
             render 'api/stories/getAllUserStories', status: :ok
             
+        end
+
+        def createStory
+            
+            # TODO user ID needs to be fetched from session data
+            @user = User.find_by(id: 1)
+            @story = @user.stories.create()
+
+            def createInsightsAndArgument(int)
+                int.times do
+                    tempInsight = @story.insights.create()
+                    tempInsight.save!
+
+                    createArguments(tempInsight, int)
+
+                end
+            end
+
+            def createArguments(insight, int)
+                int.times do 
+                    tempArgument = insight.arguments.create()
+                    tempArgument.save!
+                end
+            end
+
+            createInsightsAndArguments(3)
+ 
+            return render json: { storyId: @story.id }, status: :ok
+
         end
 
         def delete

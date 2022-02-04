@@ -18,6 +18,11 @@ export default function Home () {
             })
     }, [])
 
+    // Reloads the page when user navigates to Home using back button on browser. Answer obtained from https://stackoverflow.com/questions/9046184/reload-the-site-when-reached-via-browsers-back-button 
+    if(performance.getEntriesByType("navigation")[0].type == "back_forward"){
+        location.reload();
+    }
+
     const updateHomeAfterDelete = (deletedStoryId) => {
         setAllStories( allStories.filter(story => {
             return story['storyId'] !== deletedStoryId
@@ -64,6 +69,7 @@ export default function Home () {
     }
         
     return (
+        <>
         <Grid
             item
             container 
@@ -77,14 +83,11 @@ export default function Home () {
 
             {loaded? createStoryCards() : ""}
 
-            {loaded? createStoryCards() : ""}
-
-            {loaded? createStoryCards() : ""}
-
             <Grid item container xs={12} md={6} xl={4} align='center' alignContent='center' justifyContent='center' px={1} py={2} sx={{minHeight: "300px"}} >
                 <AddNewStory width={cardWidth}/>
             </Grid>
         </Grid>
+        </>
     )
 }
 

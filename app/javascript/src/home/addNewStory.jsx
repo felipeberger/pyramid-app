@@ -3,11 +3,18 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 
 export default function AddNewStory (props) {
 
     const addNewStoryHandler = () => {
-        // TODO navigate to URL for new story creation
+        fetch(`/api/stories/new`, safeCredentials({
+            method: 'PUT'
+        }))
+            .then(handleErrors)
+            .then(res => {
+                window.location = `/story/${res.storyId}`
+            })
     }
 
     return (
