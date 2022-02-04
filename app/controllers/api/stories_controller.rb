@@ -6,7 +6,7 @@ module Api
         # TODO add security (check user is logged in and is the owner of stories for example)
 
         def create
-            # placeholder for create api call
+            # TODO placeholder for create api call
         end
 
         def getAllUserStories
@@ -15,6 +15,12 @@ module Api
             return render json: { error: 'not_found' }, status: :not_found if !@user 
             render 'api/stories/getAllUserStories', status: :ok
             
+        end
+
+        def delete
+            @story = Story.find_by(id: params[:storyId])
+            return render json: { success: "record deleted successfully" }, status: :ok if @story.destroy
+            return render json: { error: "could not delete record" }, status: :bad_request if !@story.destroy
         end
 
         def getStoryById

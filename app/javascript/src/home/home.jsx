@@ -18,6 +18,12 @@ export default function Home () {
             })
     }, [])
 
+    const updateHomeAfterDelete = (deletedStoryId) => {
+        setAllStories( allStories.filter(story => {
+            return story['storyId'] !== deletedStoryId
+        }))
+    }
+
     const cardWidth = '450px';
     const cardHeight = '475px';
     
@@ -29,15 +35,15 @@ export default function Home () {
         return (
             allStories.map( (story, index) => {
                 return (
-                    <Grid 
-                        item 
+                    <Grid
+                        item
                         xs={12}
-                        md={6} 
-                        xl={4} 
-                        align='center' 
-                        key={story.storyId}
+                        md={6}
+                        xl={4}
+                        align='center'
+                        key={index}
                         px={1}
-                        py={2} 
+                        py={2}
                     >
                         {/* checking array has own property answer obtained from https://stackoverflow.com/questions/13107855/how-to-check-if-an-array-index-exists-or-not-in-javascript
                         Did not use the most upvoted answer but the one that suggests using object inheritance as an array in JS is just an object under the hood */}
@@ -49,6 +55,7 @@ export default function Home () {
                             secondInsight={story.insights.hasOwnProperty(1) ? story.insights[1].insight : "INSIGHT" } 
                             thirdInsight={story.insights.hasOwnProperty(2) ? story.insights[2].insight : "INSIGHT"}
                             storyId={story.storyId}
+                            updateHome={updateHomeAfterDelete}
                         />
                     </Grid>
                 )

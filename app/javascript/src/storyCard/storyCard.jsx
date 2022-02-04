@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
+import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 
 export default function StoryCard (props) {
 
@@ -26,7 +27,14 @@ export default function StoryCard (props) {
     }
 
     const deleteButtonHandler = () => {
-        // TODO call API that deleted the story based on the storyID
+        fetch(`/api/stories/delete/${props.storyId}`, safeCredentials({
+            method: 'DELETE'
+        }))
+            .then(handleErrors)
+            .then(res => {
+                console.log(res)
+                props.updateHome(props.storyId)
+            })
     }
 
     return (

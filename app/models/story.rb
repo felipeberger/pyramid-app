@@ -1,7 +1,7 @@
 class Story < ApplicationRecord
 
     belongs_to :user
-    has_many :insights
+    has_many :insights, dependent: :destroy
     has_many :arguments, through: :insights
 
     validates :situation, presence: true

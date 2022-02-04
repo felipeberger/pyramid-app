@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/stories/:storyId' => 'stories#getStoryById'
     get '/stories/:userId/getall' => 'stories#getAllUserStories'
     put '/stories/saveStory/:storyId' => 'stories#saveStory'
+    delete '/stories/delete/:storyId' => 'stories#delete'
 
   end
 
