@@ -20,7 +20,7 @@ module Api
             @user = User.find_by(id: 1)
             @story = @user.stories.create()
 
-            def createInsightsAndArgument(int)
+            def createInsightsAndArguments(int)
                 int.times do
                     tempInsight = @story.insights.create()
                     tempInsight.save!
