@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { AppBar } from '@mui/material';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,12 +10,25 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import DetailsIcon from '@mui/icons-material/Details';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { logoutUser, checkUser } from '../authenticate/magic';
+import { typography } from '@mui/system';
 
 const Navbar = () => {
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    // TODO user ID should be fetched from active user or gotten from props
-    const [userId, setUserId] = useState(1)
+    const [anchorElNav, setAnchorElNav] = useState(null)    
+    const [loggedIn, setLoggedIn] = useState('')
   
+    useEffect( ()=> {
+        checkUser( (object) => {
+            if (object.isLoggedIn) {
+                setLoggedIn(true)
+            } else {
+                setLoggedIn(false)
+            }
+        })
+    }, [])
+
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
       };
@@ -23,12 +36,42 @@ const Navbar = () => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const handleLogOut = async () => {
+        await logoutUser()
+        setLoggedIn(false)
+        window.location = '/'
+    }
     
     const loggedInMenuLinks = [{title:'Stories', link: '/'}, {title:'Settings', link:'/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
 
-    const loggedOutMenuLinks = [{title:'Stories', link: '/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-in',link:'/'}] 
+    const loggedOutMenuLinks = [{title:'Stories', link: '/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-in',link:'/authenticate'}] 
 
-    const menuLinks = userId? loggedInMenuLinks : loggedOutMenuLinks 
+    const menuLinks = loggedIn? loggedInMenuLinks : loggedOutMenuLinks 
+
+    const createMenuLinks = (minimizedMenuBool) => {
+
+        return menuLinks.map( (menuLink) => {
+            if (minimizedMenuBool) {
+                return menuLink.title === 'Log-out'? 
+                    <MenuItem key={menuLink.title}>
+                        <Button underline="hover" color="inherit" onClick={handleLogOut}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
+                    </MenuItem>
+                    :
+                    <MenuItem key={menuLink.title}>
+                        <Button underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>    
+                    </MenuItem>
+            }
+
+            if (!minimizedMenuBool) {
+                return menuLink.title === 'Log-out'? 
+                    <Button underline="hover" color="inherit" key={menuLink.title} onClick={handleLogOut}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
+                    :
+                    <Button underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
+            }
+
+        })
+    }
 
     return (
         <AppBar position="static" >
@@ -42,7 +85,7 @@ const Navbar = () => {
                     </Box>
                     <Box 
                         sx={{ flexGrow: 0, 
-                            display: { xs: 'flex', md: 'none' }, 
+                            display: { xs: 'flex', lg: 'none' }, 
                             flexDirection: 'row-reverse',
                             width:'100%' }}
                     >
@@ -65,25 +108,30 @@ const Navbar = () => {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                         >
-                            {menuLinks.map( (menuLink) => (
+                            {createMenuLinks(true)}
+                            {/* {menuLinks.map( (menuLink) => (
                                 <MenuItem key={menuLink.title}>
                                     <Link underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}>
                                         {menuLink.title}
                                     </Link>
                                 </MenuItem>    
-                            ))}
+                            ))} */}
                         </Menu>
                     </Box>
                     <Box 
                         sx={{ flexGrow: 0, 
-                            display: { xs: 'none', md: 'flex' }, 
+                            display: { xs: 'none', lg: 'flex' }, 
                             flexDirection: 'row-reverse',
                             width:'100%' }}
                     >
                         <Breadcrumbs aria-label="breadcrumb" color="white" >
-                            {menuLinks.map( (menuLink) => (
-                                <Link underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}><h3>{menuLink.title}</h3></Link>    
-                            ))}
+                            {createMenuLinks(false)}
+                            {/* {menuLinks.map( (menuLink) => (
+                                menuLink.title === 'Log-out' ? 
+                                <Button underline="hover" color="inherit" key={menuLink.title} onClick={handleLogOut}><h3>{menuLink.title}</h3></Button>
+                                :
+                                <Button underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}><h3>{menuLink.title}</h3></Button>
+                            ))} */}
                         </Breadcrumbs>                        
                     </Box>
                 </Toolbar>
