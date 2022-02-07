@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { loginUser, checkUser } from './magic';
-import { Typography, FormGroup, TextField, FormControl, FormLabel, Input, InputLabel, Box } from "@mui/material";
+import { FormGroup, FormControl, Input, InputLabel, Box, Typography } from "@mui/material";
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
@@ -9,6 +9,21 @@ export default function Authenticate () {
     const [loading, setLoading] = useState('')
     const [error, setError] = useState(null)
     const [loggedIn, setLoggedIn] = useState(false)
+
+    useEffect( () => {
+      if(!localStorage.getItem('storedUserEmail')) {    
+        checkUser( (metadata) => {
+          if (metadata.isLoggedIn) {
+              localStorage.setItem('storedUserEmail', metadata.email)
+              setLoggedIn(true)
+          } else {
+              setLoggedIn(false)
+          }
+        })
+      } else {
+        setLoggedIn(true)
+      }
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -34,6 +49,41 @@ export default function Authenticate () {
       setEmail(event.target.value);
     };
 
+    const alreadyLoggedIn = () => {
+      console.log(localStorage.getItem('storedUserEmail'))
+      return (
+        <Typography
+          variant="h4"
+        >
+          You are already logged in! 🎉🥳🎉
+        </Typography>
+      )
+    }
+
+    const notLoggedIn = () => {
+      return (
+        <FormGroup >
+          <FormControl>
+            <InputLabel>Email Address</InputLabel>
+            <Input 
+              id="emailInput" 
+              type="email" 
+              value={email}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <Button
+            type="submit"
+            variant="outlined"
+            size="large"
+            sx={{my:3}}
+          >
+            {loggedIn? 'Logged In' : loading ? 'Loading...' : 'Log In / Sign Up' }
+          </Button>
+        </FormGroup>
+      )
+    }
+
     return (
         <>
         <Grid
@@ -49,22 +99,7 @@ export default function Authenticate () {
             onSubmit={handleSubmit}
             py={5}
           >
-            <FormGroup >
-                <FormControl>
-                  <InputLabel>Email Address</InputLabel>
-                  <Input 
-                    id="emailInput" 
-                    type="email" 
-                    value={email}
-                    onChange={handleChange}
-                  />
-                </FormControl>
-                <Button
-                  type="submit"
-                >
-                  {loading ? 'Loading...' :  loggedIn? 'Logged In' : 'Log In / Sign Up' }
-                </Button>
-            </FormGroup>
+            {loggedIn? alreadyLoggedIn() : notLoggedIn()}
           </Box>
         </Grid>
         </>

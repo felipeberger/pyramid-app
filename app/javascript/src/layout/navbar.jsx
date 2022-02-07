@@ -19,15 +19,20 @@ const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null)    
     const [loggedIn, setLoggedIn] = useState('')
   
-    useEffect( ()=> {
-        checkUser( (object) => {
-            if (object.isLoggedIn) {
+    useEffect( () => {
+        if(!localStorage.getItem('storedUserEmail')) {    
+          checkUser( (metadata) => {
+            if (metadata.isLoggedIn) {
+                localStorage.setItem('storedUserEmail', metadata.email)
                 setLoggedIn(true)
             } else {
                 setLoggedIn(false)
             }
-        })
-    }, [])
+          })
+        } else {
+          setLoggedIn(true)
+        }
+      }, [])
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -37,8 +42,9 @@ const Navbar = () => {
         setAnchorElNav(null);
     };
 
-    const handleLogOut = async () => {
+    const handleUserLogOut = async () => {
         await logoutUser()
+        localStorage.removeItem('storedUserEmail')
         setLoggedIn(false)
         window.location = '/'
     }
@@ -55,7 +61,7 @@ const Navbar = () => {
             if (minimizedMenuBool) {
                 return menuLink.title === 'Log-out'? 
                     <MenuItem key={menuLink.title}>
-                        <Button underline="hover" color="inherit" onClick={handleLogOut}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
+                        <Button underline="hover" color="inherit" onClick={handleUserLogOut}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
                     </MenuItem>
                     :
                     <MenuItem key={menuLink.title}>
@@ -65,7 +71,7 @@ const Navbar = () => {
 
             if (!minimizedMenuBool) {
                 return menuLink.title === 'Log-out'? 
-                    <Button underline="hover" color="inherit" key={menuLink.title} onClick={handleLogOut}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
+                    <Button underline="hover" color="inherit" key={menuLink.title} onClick={handleUserLogOut}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
                     :
                     <Button underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}><Typography variant={minimizedMenuBool? 'string' : 'h6'}>{menuLink.title}</Typography></Button>
             }
