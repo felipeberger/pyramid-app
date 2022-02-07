@@ -16,5 +16,9 @@ class PagesController < ApplicationController
     @data = { storyId: params[:storyId] }.to_json
     render 'slideshow'
   end
+
+  def authenticate
+    render 'authenticate'
+  end
   
 end

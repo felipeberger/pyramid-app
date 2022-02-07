@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/explanation' => 'pages#explanation'
   get '/story/:storyId' => 'pages#storyPage'
   get '/story/:storyId/slideshow' => 'pages#slideshow'
+  get '/authenticate' => 'pages#authenticate'
   
   namespace :api do
 
