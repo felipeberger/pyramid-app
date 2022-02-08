@@ -11,7 +11,7 @@ export default function Slideshow (props) {
     const [loaded, setLoaded] = useState(false)
 
     useEffect( ()=> {
-        fetch(`/api/stories/${props.storyId}`)
+        fetch(`/api/stories/fetch/${props.storyId}`)
             .then(handleErrors)
             .then(data => {
                 setSlideData(data.story)
@@ -31,17 +31,17 @@ export default function Slideshow (props) {
         const sizeExplanation = 'h4'
 
         const slidesData = [
-            [createTypographyComponent(`Situation: ${slideData['situation']}`, sizeSCQA), createTypographyComponent(`Complication: ${slideData['complication']}`,sizeSCQA), createTypographyComponent(`Question: ${slideData['question']}`, sizeSCQA)], 
-            [createTypographyComponent(`Answer: ${slideData['answer']}`, sizeSCQA) ]
+            [createTypographyComponent(`Situation: ${slideData['situation'] === null ? '' : slideData['situation'] }`, sizeSCQA), createTypographyComponent(`Complication: ${slideData['complication'] === null ? '' : slideData['complication']}`,sizeSCQA), createTypographyComponent(`Question: ${slideData['question'] === null ? '' : slideData['question']}`, sizeSCQA)], 
+            [createTypographyComponent(`Answer: ${slideData['answer'] === null ? '' : slideData['answer']}`, sizeSCQA) ]
         ]
 
         slideData['insights'].forEach( (insightAndArguments, index) => {
 
-            if (insightAndArguments['insight'] === '') return
+            if (insightAndArguments['insight'] === '' || insightAndArguments['insight'] === null ) return
             slidesData.push([createTypographyComponent(`Insight ${index + 1}: ${insightAndArguments['insight']}`, sizeInsight) ])
 
             insightAndArguments['arguments'].map( (argumentAndExplanation, index) => {
-                if (argumentAndExplanation['argument'] === '') return
+                if (argumentAndExplanation['argument'] === '' || argumentAndExplanation['argument'] === null) return
                 slidesData.push ([createTypographyComponent(`Argument ${index + 1}: ${argumentAndExplanation['argument']}`, sizeArgument), createTypographyComponent(`Explanation: ${argumentAndExplanation['explanation']}`, sizeExplanation)])
             })
         })

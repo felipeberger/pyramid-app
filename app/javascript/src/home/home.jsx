@@ -3,14 +3,14 @@ import Grid from '@mui/material/Grid';
 import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
 import { handleErrors } from '../utils/fetchHelper';
+import { Typography } from "@mui/material";
 
 export default function Home () {
     const [loaded, setLoaded] = useState(false);
     const [allStories, setAllStories] = useState([])
 
-    // TODO update user ID being passed to fetch (should be drawn from another API call to get logged in user ID)
     useEffect( ()=> {
-        fetch(`/api/stories/${1}/getall`)
+        fetch(`/api/stories/getall?email=${localStorage.getItem('storedUserEmail')}`)
             .then(handleErrors)
             .then(data => {
                 setAllStories(data.user.stories)
@@ -20,7 +20,7 @@ export default function Home () {
 
     // Reloads the page when user navigates to Home using back button on browser. Answer obtained from https://stackoverflow.com/questions/9046184/reload-the-site-when-reached-via-browsers-back-button 
     if(performance.getEntriesByType("navigation")[0].type == "back_forward"){
-        location.reload();
+        location.reload()
     }
 
     const updateHomeAfterDelete = (deletedStoryId) => {
@@ -35,7 +35,6 @@ export default function Home () {
     const createStoryCards = () => {
         if (!loaded) return
         if (!allStories) return
-        console.log(allStories)
         
         return (
             allStories.map( (story, index) => {
@@ -67,6 +66,42 @@ export default function Home () {
             })
         )
     }
+
+    const displayNewStoryOrLogin = () => {
+        if (localStorage.getItem('storedUserEmail')) {
+            return (
+                <Grid 
+                    item 
+                    container 
+                    xs={12} 
+                    md={6} 
+                    xl={4} 
+                    align='center' 
+                    alignContent='center' 
+                    justifyContent='center' 
+                    px={1} 
+                    py={2}
+                    minHeight='300px'
+                >
+                    <AddNewStory width={cardWidth}/>
+                </Grid>
+            )
+        }
+
+        return (
+            <Grid
+                item
+                width='100%'
+                textAlign='center'
+            >
+                <Typography
+                    variant='h3'
+                >
+                    Please log in to create your first story
+                </Typography>
+            </Grid>        
+        )
+    }
         
     return (
         <>
@@ -77,15 +112,14 @@ export default function Home () {
             direction='row'
             alignContent='center' 
             justify='center'
-            sx={{minHeight:'88vh'}}
-            my={{sm:2, md:0}}
+            minHeight='87vh'
+            my={{sm:1, md:0}}
             >
 
             {loaded? createStoryCards() : ""}
 
-            <Grid item container xs={12} md={6} xl={4} align='center' alignContent='center' justifyContent='center' px={1} py={2} sx={{minHeight: "300px"}} >
-                <AddNewStory width={cardWidth}/>
-            </Grid>
+            {displayNewStoryOrLogin()}
+
         </Grid>
         </>
     )

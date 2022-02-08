@@ -7,8 +7,7 @@ module Api
 
         def getAllUserStories
 
-            # TODO change so userId is obtained from session data
-            @user = User.find_by(id: params[:userId])
+            @user = User.find_by(email: params[:email])
             return render json: { error: 'not_found' }, status: :not_found if !@user 
             render 'api/stories/getAllUserStories', status: :ok
             
@@ -17,7 +16,7 @@ module Api
         def createStory
             
             # TODO user ID needs to be fetched from session data
-            @user = User.find_by(id: 1)
+            @user = User.find_by(email: params[:email])
             @story = @user.stories.create()
 
             def createInsightsAndArguments(int)
@@ -59,8 +58,8 @@ module Api
 
         def saveStory
 
-            # TODO user ID needs to be fetched from session data
-            @user = User.find_by(id: 1)
+            # TODO update so you search only within stories that belong to the @user
+            @user = User.find_by(email: params[:userEmail])
             @story = Story.find_by(id: params[:storyId])
             data_insights = params[:insights]
 

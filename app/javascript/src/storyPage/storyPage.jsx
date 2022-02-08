@@ -15,7 +15,7 @@ class StoryPage extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`/api/stories/${this.props.storyId}`)
+        fetch(`/api/stories/fetch/${this.props.storyId}`)
             .then(handleErrors)
             .then(data => {
                 this.setState({
@@ -134,7 +134,7 @@ class StoryPage extends React.Component {
                 uploading: true
             })
 
-            fetch(`/api/stories/saveStory/${this.state.storyId}`, safeCredentials({
+            fetch(`/api/stories/saveStory/${this.props.storyId}`, safeCredentials({
                 method: 'PUT',
                 body: JSON.stringify(this.state.storyData)
             }))

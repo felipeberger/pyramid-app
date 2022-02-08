@@ -65,7 +65,7 @@ export default function InsightAndArguments (props) {
             px={1}
             width='30%' 
         >
-            <ArrowUpwardIcon />
+            <ArrowUpwardIcon fontSize="large" />
 
             <TextField 
                 fullWidth 
@@ -78,7 +78,7 @@ export default function InsightAndArguments (props) {
                 rows={inputHeightForInsights}
             />
 
-            <ArrowUpwardIcon />
+            <ArrowUpwardIcon fontSize="large" />
 
             <Grid
                 container

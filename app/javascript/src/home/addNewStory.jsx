@@ -8,7 +8,7 @@ import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 export default function AddNewStory (props) {
 
     const addNewStoryHandler = () => {
-        fetch(`/api/stories/new`, safeCredentials({
+        fetch(`/api/stories/new?email=${localStorage.getItem('storedUserEmail')}`, safeCredentials({
             method: 'PUT'
         }))
             .then(handleErrors)

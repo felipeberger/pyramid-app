@@ -1,5 +1,5 @@
 json.user do
-    json.username @user.username
+    json.userEmail @user.email
     json.userID @user.id
 
     json.stories do 
