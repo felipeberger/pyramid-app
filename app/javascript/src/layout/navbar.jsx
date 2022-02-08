@@ -44,12 +44,12 @@ const Navbar = () => {
 
     const handleUserLogOut = async () => {
         localStorage.removeItem('storedUserEmail')
-        await logoutUser()
         setLoggedIn(false)
+        await logoutUser()
         window.location = '/'
     }
     
-    const loggedInMenuLinks = [{title:'Stories', link: '/'}, {title:'Settings', link:'/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
+    const loggedInMenuLinks = [{title:'Stories', link: '/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
 
     const loggedOutMenuLinks = [{title:'Stories', link: '/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-in',link:'/authenticate'}] 
 

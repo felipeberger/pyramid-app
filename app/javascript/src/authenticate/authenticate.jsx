@@ -46,6 +46,7 @@ export default function Authenticate () {
         }
         try {
           await loginUser(email)
+          localStorage.setItem('storedUserEmail', email)
           setLoading(false)
           setLoggedIn(true)
           await createNewUserOnDatabase(email)

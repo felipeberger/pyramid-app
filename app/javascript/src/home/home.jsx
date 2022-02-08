@@ -97,7 +97,7 @@ export default function Home () {
                 <Typography
                     variant='h3'
                 >
-                    Please log in to create your first story
+                    Please log in to create stories
                 </Typography>
             </Grid>        
         )
