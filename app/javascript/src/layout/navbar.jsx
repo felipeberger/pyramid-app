@@ -43,8 +43,8 @@ const Navbar = () => {
     };
 
     const handleUserLogOut = async () => {
-        await logoutUser()
         localStorage.removeItem('storedUserEmail')
+        await logoutUser()
         setLoggedIn(false)
         window.location = '/'
     }

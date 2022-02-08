@@ -3,6 +3,7 @@ import { loginUser, checkUser } from './magic';
 import { FormGroup, FormControl, Input, InputLabel, Box, Typography } from "@mui/material";
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 
 export default function Authenticate () {
     const [email, setEmail] = useState('')
@@ -25,6 +26,16 @@ export default function Authenticate () {
       }
     }, [])
 
+    const createNewUserOnDatabase = async (userEmail) => {
+      fetch(`/api/users/new?email=${userEmail}`, safeCredentials({
+        method: 'PUT'
+      }))
+      .then(handleErrors)
+      .then(res => {
+        console.log(res)
+      })
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -34,9 +45,10 @@ export default function Authenticate () {
           return;
         }
         try {
-          await loginUser(email);
-          setLoading(false);
+          await loginUser(email)
+          setLoading(false)
           setLoggedIn(true)
+          await createNewUserOnDatabase(email)
           window.location = '/'
           
         } catch (error) {
@@ -50,13 +62,16 @@ export default function Authenticate () {
     };
 
     const alreadyLoggedIn = () => {
-      console.log(localStorage.getItem('storedUserEmail'))
       return (
-        <Typography
-          variant="h4"
+        <Box
+          textAlign='center'
         >
-          You are already logged in! 🎉🥳🎉
-        </Typography>
+          <Typography
+            variant="h4"
+          >
+            You are already logged in! 🎉🥳🎉
+          </Typography>
+        </Box>
       )
     }
 

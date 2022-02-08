@@ -11,11 +11,14 @@ Rails.application.routes.draw do
   namespace :api do
 
     #Stories
-    get '/stories/:storyId' => 'stories#getStoryById'
-    get '/stories/:userId/getall' => 'stories#getAllUserStories'
+    get '/stories/fetch/:storyId' => 'stories#getStoryById'
+    get '/stories/getall' => 'stories#getAllUserStories'
     put '/stories/new' => 'stories#createStory'
     put '/stories/saveStory/:storyId' => 'stories#saveStory'
     delete '/stories/delete/:storyId' => 'stories#delete'
+
+    #Users
+    put '/users/new' => 'users#create'
 
   end
 

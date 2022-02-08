@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_31_043824) do
+ActiveRecord::Schema.define(version: 2022_02_07_061714) do
 
   create_table "arguments", force: :cascade do |t|
     t.string "argument"
@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(version: 2022_01_31_043824) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
