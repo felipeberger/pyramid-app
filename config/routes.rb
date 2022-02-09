@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
-  root 'pages#home'
+  root 'pages#landing'
 
   get '/explanation' => 'pages#explanation'
   get '/story/:storyId' => 'pages#storyPage'
   get '/story/:storyId/slideshow' => 'pages#slideshow'
   get '/authenticate' => 'pages#authenticate'
   get '/home' => 'pages#home'
+  get '/landing' => 'pages#landing'
   
   namespace :api do
 
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     delete '/stories/delete/:storyId' => 'stories#delete'
 
     #Users
-    put '/users/new' => 'users#create'
+    post '/users' => 'users#create'
 
   end
 
