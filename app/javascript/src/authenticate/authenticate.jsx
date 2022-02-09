@@ -27,8 +27,13 @@ export default function Authenticate () {
     }, [])
 
     const createNewUserOnDatabase = async (userEmail) => {
-      fetch(`/api/users/new?email=${userEmail}`, safeCredentials({
-        method: 'PUT'
+      fetch(`/api/users`, safeCredentials({
+        method: 'POST',
+        body: JSON.stringify({
+          user: {
+            email: userEmail
+          }
+        })
       }))
       .then(handleErrors)
       .then(res => {
@@ -50,7 +55,7 @@ export default function Authenticate () {
           setLoading(false)
           setLoggedIn(true)
           await createNewUserOnDatabase(email)
-          window.location = '/'
+          window.location = '/home'
           
         } catch (error) {
           setError('Unable to log in');

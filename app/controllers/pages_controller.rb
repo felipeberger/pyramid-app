@@ -20,5 +20,9 @@ class PagesController < ApplicationController
   def authenticate
     render 'authenticate'
   end
+
+  def landing 
+    render 'landing'
+  end
   
 end

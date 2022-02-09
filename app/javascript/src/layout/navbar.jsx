@@ -9,11 +9,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import DetailsIcon from '@mui/icons-material/Details';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { logoutUser, checkUser } from '../authenticate/magic';
-import { typography } from '@mui/system';
 
 const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null)    
@@ -46,12 +44,12 @@ const Navbar = () => {
         localStorage.removeItem('storedUserEmail')
         setLoggedIn(false)
         await logoutUser()
-        window.location = '/'
+        window.location = '/home'
     }
     
-    const loggedInMenuLinks = [{title:'Stories', link: '/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
+    const loggedInMenuLinks = [{title:'Stories', link: '/home'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
 
-    const loggedOutMenuLinks = [{title:'Stories', link: '/'}, {title:'Explanation', link: '/explanation'}, {title:'Log-in',link:'/authenticate'}] 
+    const loggedOutMenuLinks = [{title:'Stories', link: '/home'}, {title:'Explanation', link: '/explanation'}, {title:'Log-in',link:'/authenticate'}] 
 
     const menuLinks = loggedIn? loggedInMenuLinks : loggedOutMenuLinks 
 
@@ -83,7 +81,7 @@ const Navbar = () => {
         <AppBar position="static" >
             <Container maxWidth="xl" >
                 <Toolbar disableGutters >
-                    <Box sx={{fleGrow:0, width:'100%'}}>
+                    <Box sx={{flexGrow:0, width:'100%'}}>
                         <IconButton href='/'>
                             <DetailsIcon sx={{width:'50px', height:'50px', color:'white'}}/>
                         </IconButton>
