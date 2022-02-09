@@ -49,10 +49,10 @@ export default function Landing () {
                             px={{xs: 5, lg: 0}}
                         >
                             <Typography variant='h3' maxWidth='xl' color='white' pb={2}>
-                                Help your team structure and sense-check their arguments faster
+                                Speed up your team's construction of solid consulting storyboards
                             </Typography>
-                            <Typography variant='h5' maxWidth='xl' color='white'>
-                                The Pyramid App transforms the Pyramid Principle consulting framework into an easy to use web application that speeds up the construction of consulting storyboards.  
+                            <Typography variant='h5' maxWidth='xl' color='white' paragraph>
+                                The pyramid app saves time by helping teams structure arguments and quickly iterate over presentation storyboards  
                             </Typography>
                         </Grid>
                         <Grid
@@ -92,7 +92,7 @@ export default function Landing () {
                             py={2}
                             maxWidth='md'
                         >
-                            The pyramid principle is a problem solving and writing framework developed by Barbara Minto, an ex-Mackenzie consultant. The framework's main point is that "ideas in writing should always form a pyramid under a single thought". All supporting insights and arguments should directly support the single though.
+                            The pyramid principle is a problem solving and writing framework developed by Barbara Minto, an ex-Mackenzie consultant. The framework's main argument is that "ideas in writing should always form a pyramid under a single thought". All supporting insights and arguments should directly support that single though.
                         </Typography>
                         <Button href='/explanation' color='primary' variant='contained' size='large'>See in-depth explanation</Button>
                     </Grid>
