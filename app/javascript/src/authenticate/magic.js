@@ -1,7 +1,5 @@
 import { Magic } from 'magic-sdk';
 
-console.log(process.env.REACT_APP_PK_KEY)
-
 const magic = new Magic(process.env.REACT_APP_PK_KEY);
 
 export const checkUser = async (cb) => {

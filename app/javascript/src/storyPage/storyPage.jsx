@@ -175,8 +175,6 @@ class StoryPage extends React.Component {
                 </Grid>
             }
 
-            {console.log(this.state.storyData)}
-
             <Grid
                 container
                 justifyContent='center'

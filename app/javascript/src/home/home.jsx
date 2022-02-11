@@ -110,7 +110,7 @@ export default function Home () {
             direction='row'
             alignContent='center' 
             justify='center'
-            minHeight='87vh'
+            minHeight='84.5vh'
             my={{sm:1, md:0}}
             >
 

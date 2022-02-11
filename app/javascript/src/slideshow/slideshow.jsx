@@ -25,10 +25,10 @@ export default function Slideshow (props) {
             return (<Typography variant={variant} align='justify' gutterBottom>{text}</Typography>)
         }
 
-        const sizeSCQA = 'h2'
-        const sizeInsight = 'h2'
-        const sizeArgument = 'h3'
-        const sizeExplanation = 'h4'
+        const sizeSCQA = 'h3'
+        const sizeInsight = 'h3'
+        const sizeArgument = 'h4'
+        const sizeExplanation = 'h5'
 
         const slidesData = [
             [createTypographyComponent(`Situation: ${slideData['situation'] === null ? '' : slideData['situation'] }`, sizeSCQA), createTypographyComponent(`Complication: ${slideData['complication'] === null ? '' : slideData['complication']}`,sizeSCQA), createTypographyComponent(`Question: ${slideData['question'] === null ? '' : slideData['question']}`, sizeSCQA)], 
@@ -61,7 +61,6 @@ export default function Slideshow (props) {
         <Grid
             container
             direction='column'
-            sx={{minHeight:'88vh'}}
         >
             <Grid
                 item
@@ -88,7 +87,7 @@ function Slide(props)
             <Grid
                 container
                 direction='column'
-                height='78vh'
+                height='73vh'
                 justifyContent="center"
                 alignItems="center"
             >
@@ -101,7 +100,7 @@ function Slide(props)
                     {props.data.map( (slide, index) => {
                         return (
                             <Box 
-                                key={index} 
+                                key={index}
                                 mx={5}
                             >
                                 {slide}
