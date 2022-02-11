@@ -20,7 +20,7 @@ export default function Landing () {
                 >
                     <Box
                         backgroundColor='#064635'
-                        height='65vh'
+                        height='67vh'
                         width='100%'
                         position='absolute'
                         marginTop='-10px'
@@ -62,13 +62,14 @@ export default function Landing () {
                             textAlign='center'
                         >
                             <Box component='div' display={{xs: 'none', lg: 'block'}}>
-                                <img src={LandingImage} height='70%' width='70%' />
+                                <img src={LandingImage} height='60%' width='60%' />
                             </Box>
                         </Grid>
                     </Grid>
                     <Grid
                         item
                         zIndex={10}
+                        pb={2}
                     >
                         <Button href='/home' variant='contained' size='large' color='warning'>Start a storyboard</Button>
                     </Grid>
