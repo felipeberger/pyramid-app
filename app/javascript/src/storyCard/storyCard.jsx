@@ -12,12 +12,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
 import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 
 export default function StoryCard (props) {
-
     const storyId = props.storyId;
     const listitemMinWidth = '5px';
     const listTypographyVariant = 'body1';
@@ -32,58 +30,76 @@ export default function StoryCard (props) {
         }))
             .then(handleErrors)
             .then(res => {
-                console.log(res)
                 props.updateHome(props.storyId)
             })
     }
 
     return (
-        <Card sx={{width: props.width, height: props.height}} >
-            <CardHeader title={props.answer} />
+        <Card>
+            <CardHeader title={props.title} titleTypographyProps={{variant: 'h5'}} />
+            <Box 
+                display='flex' 
+                width={props.width}
+                flexDirection='column'
+                justifyContent='space-between'
+            >
+                <Box
+                    justifyContent='flex-start'
+                >
+                    <CardContent sx={{py:0, px: 1}} >
+                        <List disablePadding>
 
-            <CardContent sx={{py:0}} >
-                <List disablePadding>
+                            <ListItem disablePadding>
+                                <ListItemIcon sx={{minWidth:listitemMinWidth}}>
+                                    <ChevronRightIcon />
+                                </ListItemIcon>
+                                <ListItemText >
+                                    <Typography variant={listTypographyVariant} noWrap>
+                                        Situation: {props.situation}
+                                    </Typography>
+                                </ListItemText>
+                            </ListItem>
 
-                    <ListItem disablePadding>
-                        <ListItemIcon sx={{minWidth:listitemMinWidth}}>
-                            <ChevronRightIcon />
-                        </ListItemIcon>
-                        <ListItemText >
-                            <Typography variant={listTypographyVariant}>
-                                {props.firstInsight}
-                            </Typography>
-                        </ListItemText>
-                    </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemIcon sx={{minWidth:listitemMinWidth}}>
+                                    <ChevronRightIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    <Typography variant={listTypographyVariant} noWrap>
+                                        Complication: {props.complication}
+                                    </Typography>
+                                </ListItemText>
+                            </ListItem>
 
-                    <ListItem disablePadding>
-                        <ListItemIcon sx={{minWidth:listitemMinWidth}}>
-                            <ChevronRightIcon />
-                        </ListItemIcon>
-                        <ListItemText>
-                            <Typography variant={listTypographyVariant}>
-                                {props.secondInsight}
-                            </Typography>
-                        </ListItemText>
-                    </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemIcon sx={{minWidth:listitemMinWidth}}>
+                                    <ChevronRightIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    <Typography variant={listTypographyVariant} noWrap>
+                                        Question: {props.question}
+                                    </Typography>
+                                </ListItemText>
+                            </ListItem>
 
-                    <ListItem disablePadding>
-                        <ListItemIcon sx={{minWidth:listitemMinWidth}}>
-                            <ChevronRightIcon />
-                        </ListItemIcon>
-                        <ListItemText>
-                            <Typography variant={listTypographyVariant}>
-                                {props.thirdInsight}
-                            </Typography>
-                        </ListItemText>
-                    </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemIcon sx={{minWidth:listitemMinWidth}}>
+                                    <ChevronRightIcon />
+                                </ListItemIcon>
+                                <ListItemText >
+                                    <Typography variant={listTypographyVariant} noWrap>
+                                        Answer: {props.answer}
+                                    </Typography>
+                                </ListItemText>
+                            </ListItem>
 
-                </List>
-            </CardContent>
-
-            {/* TODO have the edit and delete button grid sticky at the bottom  */}
-
-            <Grid item container alignItems='flex-end' justify='flex-end' direction='column' align={'bottom'} >
-                <Box sx={{py:1, pr:1}} >
+                        </List>
+                    </CardContent>
+                </Box>
+                <Box
+                    display='flex'
+                    justifyContent='flex-end'
+                >
                     <Tooltip title="Edit">
                         <IconButton aria-label="edit" onClick={editButtonHandler}>
                             <EditIcon />
@@ -95,8 +111,8 @@ export default function StoryCard (props) {
                         </IconButton>
                     </Tooltip>
                 </Box>
-            </Grid>
-
+            </Box>
         </Card>
+
     )
 }

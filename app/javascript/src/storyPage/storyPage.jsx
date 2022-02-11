@@ -40,7 +40,8 @@ class StoryPage extends React.Component {
             situation,
             complication,
             question,
-            answer
+            answer,
+            title
         } = storyDataObjectStart
 
         const insightsAndArguments = {
@@ -121,7 +122,7 @@ class StoryPage extends React.Component {
                 }))
                 saveStory()
 
-            }, 500)
+            }, 1000)
 
         }
 
@@ -174,6 +175,8 @@ class StoryPage extends React.Component {
                 </Grid>
             }
 
+            {console.log(this.state.storyData)}
+
             <Grid
                 container
                 justifyContent='center'
@@ -194,14 +197,39 @@ class StoryPage extends React.Component {
                     item
                     width='70%'
                     py={2}
-                    className="situationComplicationQuestion"
+                    className='title'
                 >
+                    <TextField 
+                        fullWidth 
+                        label="Project Title" 
+                        id="title"
+                        margin="normal"
+                        defaultValue={title? title : ""}
+                        onChange={textChangeHandler}
+                        rows={inputHeightForSituationComplicationQuestionAnswer}
+                    />
+                </Grid>
+                <Grid
+                    item
+                    width='70%'
+                    className="situationComplicationQuestion"
+                    sx={{
+                        backgroundColor: "lightGray", 
+                        border: 1, 
+                        padding: 1, 
+                        borderRadius: 2
+                    }}
+                    textAlign='center'
+                >
+                    <Typography variant='subtitle1' color='#7F7F7F' >
+                        Project background information
+                    </Typography>
                     <TextField 
                         fullWidth 
                         label="Situation" 
                         id="situation"
                         margin="normal"
-                        defaultValue={situation? situation : "What is the context of the study?"}
+                        defaultValue={situation? situation : "eg: The client is a top 5 car dealership in the United States"}
                         onChange={textChangeHandler}
                         multiline
                         rows={inputHeightForSituationComplicationQuestionAnswer}
@@ -211,20 +239,20 @@ class StoryPage extends React.Component {
                         label="Complication" 
                         id="complication"
                         margin="normal"
-                        defaultValue={complication? complication : "What has changed that this study is needed?"}
+                        defaultValue={complication? complication : "eg: Sales have decreased by 5% a year for the past 3 years"}
                         onChange={textChangeHandler}
                         multiline
-                        rows={inputHeightForSituationComplicationQuestionAnswer}    
+                        rows={inputHeightForSituationComplicationQuestionAnswer}
                     />
                     <TextField 
                         fullWidth 
                         label="Question" 
                         id="question"
                         margin="normal"
-                        defaultValue={question? question : "What issue are we trying to solve?"}
+                        defaultValue={question? question : "eg: How can the client increase sales by at least 10% over the next 2 years?"}
                         onChange={textChangeHandler}
                         multiline
-                        rows={inputHeightForSituationComplicationQuestionAnswer}    
+                        rows={inputHeightForSituationComplicationQuestionAnswer}
                     />
                 </Grid>
 
@@ -239,10 +267,10 @@ class StoryPage extends React.Component {
                         label="Answer" 
                         id="answer"
                         margin="normal"
-                        defaultValue={answer? answer : "What is your main argument?"}
+                        defaultValue={answer? answer : "eg: The client should focus on selling smaller and more effient cars to urban populations"}
                         onChange={textChangeHandler}
                         multiline
-                        rows={inputHeightForSituationComplicationQuestionAnswer}    
+                        rows={inputHeightForSituationComplicationQuestionAnswer}
                     />
                 </Grid>
             </Grid>

@@ -7,6 +7,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import ExplanationPopUp from "./explanationPopUp";
+import { Typography } from "@mui/material";
 
 export default function InsightAndArguments (props) {
     const [openPopup, setOpenPopup] = useState(false)
@@ -72,7 +73,7 @@ export default function InsightAndArguments (props) {
                 label={`Insight #${props.insightId}`}
                 id={`insight${props.insightId}`}
                 margin="normal"
-                defaultValue={insightValue? insightValue : "Insight"}
+                defaultValue={insightValue? insightValue : "Insight supporting answer"}
                 onChange={textChangeHandler}
                 multiline
                 rows={inputHeightForInsights}
@@ -94,6 +95,9 @@ export default function InsightAndArguments (props) {
                     }}
                     my={2}
                 >
+                    <Typography variant='subtitle1' color='#7F7F7F' >
+                        Data must support insight above this section
+                    </Typography>
                     <Box
                         display='flex'
                         justifyContent='center'

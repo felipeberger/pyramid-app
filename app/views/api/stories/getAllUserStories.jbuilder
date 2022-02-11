@@ -4,6 +4,7 @@ json.user do
 
     json.stories do 
         json.array! @user.stories do |story|
+            json.title story.title
             json.storyId story.id
             json.situation story.situation
             json.complication story.complication

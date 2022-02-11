@@ -4,6 +4,7 @@ class Story < ApplicationRecord
     has_many :insights, dependent: :destroy
     has_many :arguments, through: :insights
 
+    validates :title, presence: false
     validates :situation, presence: false
     validates :complication, presence: false
     validates :question, presence: false

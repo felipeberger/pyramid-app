@@ -1,5 +1,6 @@
 json.story do 
     json.id @story.id
+    json.title @story.title
     json.situation @story.situation
     json.complication @story.complication
     json.question @story.question

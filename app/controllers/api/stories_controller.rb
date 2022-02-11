@@ -63,6 +63,7 @@ module Api
             @story = Story.find_by(id: params[:storyId])
             data_insights = params[:insights]
 
+            @story.title = params[:title]
             @story.situation = params[:situation]
             @story.complication = params[:complication]
             @story.question = params[:question]
@@ -88,7 +89,7 @@ module Api
         private
 
             def story_params
-                params.require(:story).permit(:situation, :complication, :question, :answer)
+                params.require(:story).permit(:situation, :complication, :question, :answer, :title)
             end
 
             def insight_params

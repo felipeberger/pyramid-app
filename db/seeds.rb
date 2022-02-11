@@ -13,8 +13,8 @@ users = User.create([
 ])
 
 stories = Story.create([
-    {situation: 'Client is a top 3 used car dealership', complication: 'Sales of cars have decreased by 10% year on year for the past 3 years', question: 'How can the client increase sales', answer: 'Client should diversify into motorcycles and scooters to target urban youth', user: users.first},
-    {situation: 'Client is a local coworking space', complication: 'Membership of coworking declines during summer months', question: 'How can the coworking space retain membership during summer months?', answer: 'Coworking space should air condition main working areas and invest in bringing in business speakers and other events that will benefit users that retain their membership', user: users.first}
+    {title: 'Project Titanium', situation: 'Client is a top 3 used car dealership', complication: 'Sales of cars have decreased by 10% year on year for the past 3 years', question: 'How can the client increase sales', answer: 'Client should diversify into motorcycles and scooters to target urban youth', user: users.first},
+    {title: 'Coworking Space Project', situation: 'Client is a local coworking space', complication: 'Membership of coworking declines during summer months', question: 'How can the coworking space retain membership during summer months?', answer: 'Coworking space should air condition main working areas and invest in bringing in business speakers and other events that will benefit users that retain their membership', user: users.first}
 ])
 
 insights = Insight.create([
