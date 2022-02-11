@@ -82,7 +82,7 @@ const Navbar = () => {
             <Container maxWidth="xl" >
                 <Toolbar disableGutters >
                     <Box sx={{flexGrow:0, width:'100%'}}>
-                        <IconButton href='/'>
+                        <IconButton href='/home'>
                             <DetailsIcon sx={{width:'50px', height:'50px', color:'white'}}/>
                         </IconButton>
 
