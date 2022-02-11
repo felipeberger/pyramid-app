@@ -47,9 +47,9 @@ const Navbar = () => {
         window.location = '/home'
     }
     
-    const loggedInMenuLinks = [{title:'Stories', link: '/home'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
+    const loggedInMenuLinks = [{title:'Storyboards', link: '/home'}, {title:'Explanation', link: '/explanation'}, {title:'Log-out',link:'/'}]
 
-    const loggedOutMenuLinks = [{title:'Stories', link: '/home'}, {title:'Explanation', link: '/explanation'}, {title:'Log-in',link:'/authenticate'}] 
+    const loggedOutMenuLinks = [{title:'Storyboards', link: '/home'}, {title:'Explanation', link: '/explanation'}, {title:'Log-in',link:'/authenticate'}] 
 
     const menuLinks = loggedIn? loggedInMenuLinks : loggedOutMenuLinks 
 
@@ -113,13 +113,6 @@ const Navbar = () => {
                             onClose={handleCloseNavMenu}
                         >
                             {createMenuLinks(true)}
-                            {/* {menuLinks.map( (menuLink) => (
-                                <MenuItem key={menuLink.title}>
-                                    <Link underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}>
-                                        {menuLink.title}
-                                    </Link>
-                                </MenuItem>    
-                            ))} */}
                         </Menu>
                     </Box>
                     <Box 
@@ -130,12 +123,6 @@ const Navbar = () => {
                     >
                         <Breadcrumbs aria-label="breadcrumb" color="white" >
                             {createMenuLinks(false)}
-                            {/* {menuLinks.map( (menuLink) => (
-                                menuLink.title === 'Log-out' ? 
-                                <Button underline="hover" color="inherit" key={menuLink.title} onClick={handleLogOut}><h3>{menuLink.title}</h3></Button>
-                                :
-                                <Button underline="hover" color="inherit" href={menuLink.link} key={menuLink.title}><h3>{menuLink.title}</h3></Button>
-                            ))} */}
                         </Breadcrumbs>                        
                     </Box>
                 </Toolbar>

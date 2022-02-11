@@ -26,7 +26,7 @@ export default function AddNewStory (props) {
                 variant='h6'
                 sx={{fontWeight:'bold', textAlign: 'center'}}
             >
-                Create New Story
+                Create New Storyboard
             </Typography>
         </Box>
     )

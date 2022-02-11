@@ -30,7 +30,6 @@ export default function Home () {
     }
 
     const cardWidth = '450px';
-    const cardHeight = '475px';
     
     const createStoryCards = () => {
         if (!loaded) return
@@ -49,15 +48,14 @@ export default function Home () {
                         px={1}
                         py={2}
                     >
-                        {/* checking array has own property answer obtained from https://stackoverflow.com/questions/13107855/how-to-check-if-an-array-index-exists-or-not-in-javascript
-                        Did not use the most upvoted answer but the one that suggests using object inheritance as an array in JS is just an object under the hood */}
                          <StoryCard 
                             width={cardWidth}
-                            height={cardHeight}
-                            answer={story.answer? story.answer : "ANSWER" } 
-                            firstInsight={story.insights.hasOwnProperty(0) ? story.insights[0].insight : "INSIGHT"  } 
-                            secondInsight={story.insights.hasOwnProperty(1) ? story.insights[1].insight : "INSIGHT" } 
-                            thirdInsight={story.insights.hasOwnProperty(2) ? story.insights[2].insight : "INSIGHT"}
+                            title={story.title}
+                            answer={story.answer} 
+                            situation={story.situation} 
+                            complication={story.complication} 
+                            question={story.question}
+                            answer={story.answer}
                             storyId={story.storyId}
                             updateHome={updateHomeAfterDelete}
                         />
@@ -97,7 +95,7 @@ export default function Home () {
                 <Typography
                     variant='h3'
                 >
-                    Please log in to create stories
+                    Please log in to create storyboards
                 </Typography>
             </Grid>        
         )

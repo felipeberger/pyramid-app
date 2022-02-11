@@ -13,7 +13,7 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.4.3",
+    "@rails/webpacker": "^5.4.3",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "dotenv": "^16.0.0",
     "magic-sdk": "^8.0.1",
