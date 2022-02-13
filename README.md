@@ -57,12 +57,12 @@ The project started by identifying a target market and a reason to exist for the
 The website will let users outline their arguments and research following the Pyramid Principle, a classic consulting framework. The pyramid principle forces users to think logically about their arguments and supporting information through constraints in how the information flows along the pyramid structure. This constraint is very helpful for entry level analysts and non-native English speakers as it does not require them to write long paragraphs, but to focus on impactful insights and supporting research and graphs/charts.
 ```
 
-Then a wireframe on figma visualized what the app could look like
-![wireframe](https://www.figma.com/proto/RCjAaYf6J7wgCE1ZEfwjxo/Pyramid-App?node-id=38%3A853&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=34%3A670)
+Then a wireframe on figma visualized the UI/UX
+![wireframe](./readme_assets/wireframe.png)
 
 ## Challenges
 There were several challenges faced during the creation of this app. The major challenges were:
-* Implementation of the magic SDK in local environment - the environmental variables were not available for the SDK. The solution involved installed dotenv to make the variables available 
+* Implementation of the magic SDK in local environment - the environmental variables were not available for the SDK. The solution involved installed dotenv to make the variables available
 * Implementation of magic SDK in production environment (Heroku) - the environmental variables were also not available to the SDK in production as dotenv required a .env.production document pointed as the .env file
 * Being flexible with the implementation of the initial wireframes and product ideas - The initial idea for the app was more ambitious than the v1.0, but the end result was a narrowly focused app that does not attemp to do much outside of its reason to exist, which is to let consultants structure arguments and insights
 
