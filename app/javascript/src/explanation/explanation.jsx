@@ -2,6 +2,9 @@ import React from 'react'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import SCQAPic from './Pyramid+SCQA.svg'
+import FilledPyramidPic from './Pyramid2.svg'
+import SlidesPic from './Slides.svg'
 
 export default function Explanation () {
 
@@ -23,7 +26,7 @@ export default function Explanation () {
             </Typography>
 
             <Box component="div" sx={{my:3}}>
-                <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/Pyramid+SCQA.svg" alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
+                <img src={SCQAPic} alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
             </Box>
 
             <Typography align='left' paragraph>
@@ -51,7 +54,7 @@ export default function Explanation () {
             </Typography>
 
             <Box component="div" sx={{my:3}}>
-                <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/Pyramid2.svg" alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
+                <img src={FilledPyramidPic} alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
             </Box>
 
             <Typography align='left' paragraph>
@@ -59,7 +62,7 @@ export default function Explanation () {
             </Typography>
 
             <Box component="div" sx={{my:3}}>
-                <img src="https://pyramid-app.s3.ap-southeast-2.amazonaws.com/slides.svg" alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
+                <img src={SlidesPic} alt="alt" width={imageWidth} style={{display: 'block',marginLeft: 'auto', marginRight: 'auto' }} />
             </Box>
 
         </Container>

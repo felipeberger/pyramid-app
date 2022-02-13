@@ -21,14 +21,15 @@ export default function Slideshow (props) {
 
     function createSlidesData () {
 
-        function createTypographyComponent(text, variant) {
-            return (<Typography variant={variant} align='justify' gutterBottom>{text}</Typography>)
-        }
-
         const sizeSCQA = 'h3'
         const sizeInsight = 'h3'
         const sizeArgument = 'h4'
         const sizeExplanation = 'h5'
+
+        function createTypographyComponent(text, variant) {
+            return (<Typography variant={variant} align='justify' gutterBottom>{text}</Typography>)
+        }
+
 
         const slidesData = [
             [createTypographyComponent(`Situation: ${slideData['situation'] === null ? '' : slideData['situation'] }`, sizeSCQA), createTypographyComponent(`Complication: ${slideData['complication'] === null ? '' : slideData['complication']}`,sizeSCQA), createTypographyComponent(`Question: ${slideData['question'] === null ? '' : slideData['question']}`, sizeSCQA)], 
