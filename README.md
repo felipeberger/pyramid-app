@@ -53,9 +53,8 @@ navigate to http://localhost:3000/
 ```
 ## Design Documentation
 The project started by identifying a target market and a reason to exist for the web app
-```
-The website will let users outline their arguments and research following the Pyramid Principle, a classic consulting framework. The pyramid principle forces users to think logically about their arguments and supporting information through constraints in how the information flows along the pyramid structure. This constraint is very helpful for entry level analysts and non-native English speakers as it does not require them to write long paragraphs, but to focus on impactful insights and supporting research and graphs/charts.
-```
+
+<i>The website will let users outline their arguments and research following the Pyramid Principle, a classic consulting framework. The pyramid principle forces users to think logically about their arguments and supporting information through constraints in how the information flows along the pyramid structure. This constraint is very helpful for entry level analysts and non-native English speakers as it does not require them to write long paragraphs, but to focus on impactful insights and supporting research and graphs/charts</i>
 
 Then a wireframe on figma visualized what the app could look like
 ![wireframe](https://www.figma.com/proto/RCjAaYf6J7wgCE1ZEfwjxo/Pyramid-App?node-id=38%3A853&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=34%3A670)
