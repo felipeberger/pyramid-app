@@ -6,7 +6,6 @@ import { Typography } from "@mui/material";
 import { handleErrors, safeCredentials } from "../utils/fetchHelper";
 import InsightAndArguments from "./insightAndArguments";
 import Button from '@mui/material/Button';
-import { Box, boxSizing } from "@mui/system";
 
 class StoryPage extends React.Component {
     state = {
@@ -114,7 +113,6 @@ class StoryPage extends React.Component {
                             insights: [...insightAndArgumentsCopy ]}
                     }))
                     saveStory()
-
                     return
                 }
                 

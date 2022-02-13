@@ -15,7 +15,7 @@ export default function InsightAndArguments (props) {
     const support3 = props.support3
     const explanation3 = props.explanation3
     const inputHeightForInsights = 4
-    const inputHeightForSupport = 3
+    const inputHeightForSupport = 2
     const inputHeightForExplanation = 3
 
     const CreateSupportAndExplanationGroups = (numberOfGroups) => {
@@ -98,7 +98,7 @@ export default function InsightAndArguments (props) {
             <Typography variant='subtitle1' color='#7F7F7F' >
                 Insights must support the answer/conclusion above
             </Typography>
-            
+
             <TextField 
                 fullWidth 
                 label={`Insight #${props.insightId}`}
