@@ -35,11 +35,11 @@ export default function StoryCard (props) {
     }
 
     return (
-        <Card>
+        <Card sx={{maxWidth: props.width}}>
             <CardHeader title={props.title} titleTypographyProps={{variant: 'h5'}} />
             <Box 
                 display='flex' 
-                width={props.width}
+                maxWidth={props.width}
                 flexDirection='column'
                 justifyContent='space-between'
             >
