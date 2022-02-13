@@ -86,20 +86,6 @@ module Api
             return render json: { success: "story saved successfully" }, status: :ok
         end
 
-        private
-
-            def story_params
-                params.require(:story).permit(:situation, :complication, :question, :answer, :title)
-            end
-
-            def insight_params
-                params.require(:insight).permit(:insight)
-            end
-
-            def argument_params
-                params.require(:argument).permit(:argument, :explanation, :data)
-            end
-
     end
 end
 
