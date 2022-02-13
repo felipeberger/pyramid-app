@@ -266,7 +266,7 @@ class StoryPage extends React.Component {
                         label="Answer" 
                         id="answer"
                         margin="normal"
-                        defaultValue={answer? answer : "eg: The client should focus on selling smaller and more effient cars to urban populations"}
+                        defaultValue={answer? answer : "eg: The client should focus on selling smaller and more efficient cars to urban populations"}
                         onChange={textChangeHandler}
                         multiline
                         rows={inputHeightForSituationComplicationQuestionAnswer}
