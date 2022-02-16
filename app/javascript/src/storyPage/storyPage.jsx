@@ -136,7 +136,7 @@ class StoryPage extends React.Component {
 
             fetch(`/api/stories/saveStory/${this.props.storyId}`, safeCredentials({
                 method: 'PUT',
-                body: JSON.stringify(this.state.storyData)
+                body: JSON.stringify({story: this.state.storyData, email: localStorage.getItem('storedUserEmail')})
             }))
                 .then(handleErrors)
                 .then(res => {
