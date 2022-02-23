@@ -1,6 +1,6 @@
 # PYRAMID APP
 
-Simple web application that gives users a framework to structure their arguments and insights and creates a simple storyboard so the user can check how their presentation flows
+Simple web application that gives users a framework to structure their arguments and insights and create simple storyboards so they can check how the information flows from slide to slide
 
 ![pyramid principle](./readme_assets/storyboard.png)
 
