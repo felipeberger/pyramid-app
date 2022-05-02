@@ -55,7 +55,6 @@ export default function Home () {
                             situation={story.situation} 
                             complication={story.complication} 
                             question={story.question}
-                            answer={story.answer}
                             storyId={story.storyId}
                             updateHome={updateHomeAfterDelete}
                         />
