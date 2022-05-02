@@ -131,7 +131,7 @@ export default function Landing () {
                                 Filter
                             </Typography>
                             <Typography variant='body1' color='primary'>
-                                Arguments and insights need to fit into a set structure, guiding the writer a concise and well structured flow of information
+                                Arguments and insights need to fit into a set structure, guiding the writer into writing concise and well structured arguments
                             </Typography>
                         </Grid>
                         <Grid
