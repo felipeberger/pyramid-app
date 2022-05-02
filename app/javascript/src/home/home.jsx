@@ -4,6 +4,7 @@ import StoryCard from '../storyCard/storyCard';
 import AddNewStory from './addNewStory';
 import { handleErrors } from '../utils/fetchHelper';
 import { Typography } from "@mui/material";
+import './home.css'
 
 export default function Home () {
     const [loaded, setLoaded] = useState(false);
@@ -109,8 +110,8 @@ export default function Home () {
             direction='row'
             alignContent='center' 
             justify='center'
-            minHeight='84.5vh'
             my={{sm:1, md:0}}
+            id="content"
             >
 
             {loaded? createStoryCards() : ""}
